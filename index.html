@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Una Cajita Para Usted 🤍</title>
+
+<style>
+body{
+  margin:0;
+  background: linear-gradient(to bottom, #fce4ec, #ffffff);
+  font-family: 'Georgia', serif;
+  text-align:center;
+  padding-top:80px;
+}
+
+/* Caja */
+.caja{
+  width:320px;
+  margin:0 auto;
+  position:relative;
+  cursor:pointer;
+  perspective:1000px;
+}
+
+/* Tapa */
+.tapa{
+  width:320px;
+  height:70px;
+  background:#ff6f91;
+  border-radius:12px 12px 0 0;
+  transition: transform 1s;
+  transform-origin: bottom;
+}
+
+/* Base */
+.base{
+  width:320px;
+  height:360px;
+  background:#ffc2d1;
+  border-radius:0 0 12px 12px;
+  padding:15px;
+  box-sizing:border-box;
+  overflow-y:auto;
+}
+
+/* Contenido oculto */
+.contenido{
+  opacity:0;
+  transition: opacity 1.5s;
+  font-size:14px;
+}
+
+/* Animación */
+.abierta .tapa{
+  transform: rotateX(120deg);
+}
+
+.abierta .contenido{
+  opacity:1;
+}
+
+img{
+  width:220px;
+  border-radius:15px;
+  margin:10px 0;
+  box-shadow:0px 0px 15px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+
+<body>
+
+<h1>Una Cajita Para Usted 💌</h1>
+<p>Haga clic en la cajita para abrirla 🤍</p>
+
+<div class="caja" onclick="abrirCaja(this)">
+  <div class="tapa"></div>
+
+  <div class="base">
+    <div class="contenido">
+
+      <h3>Para Usted 🤍</h3>
+
+      <img src="nosotros.jpeg">
+
+      <p><strong>Nuestro Inicio</strong></p>
+      <p>Desde aquel “hodi”, mi vida cambió completamente. No fue solo una palabra, fue el inicio de algo que jamás imaginé que se volvería tan importante para mí.</p>
+
+      <p><strong>Un Día Inolvidable</strong></p>
+      <p>El 26 de diciembre del 2025 conocí a sus padres. Me aceptaron como su novio y sentí que les caí muy bien. Ese día me sentí orgulloso, feliz, pleno. Fue uno de los mejores días de mi vida.</p>
+
+      <p><strong>El Mar</strong></p>
+      <p>El día que usted vio el mar, mi corazón se sintió completo. Ver su emoción, su sonrisa, su mirada… fue como cumplir una promesa silenciosa que guardaba desde hace tiempo.</p>
+
+      <p><strong>Lo Que Prometo</strong></p>
+      <p>Prometo cuidar su corazón como si fuera el mío. Prometo respetarla, valorarla y caminar a su lado incluso en los días difíciles.</p>
+
+      <p><strong>Nuestro Futuro</strong></p>
+      <p>Esto no es solo un recuerdo. Es una historia que quiero seguir escribiendo con usted, capítulo por capítulo, día tras día.</p>
+
+    </div>
+  </div>
+</div>
+
+<audio id="musica" loop>
+  <source src="cancion.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function abrirCaja(elemento){
+  elemento.classList.toggle("abierta");
+  document.getElementById("musica").play();
+}
+</script>
+
+</body>
+</html>
