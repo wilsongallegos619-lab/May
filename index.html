@@ -2,114 +2,147 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Una Cajita Para Usted 🤍</title>
-
+<title>Una Cajita Para Usted 💌</title>
 <style>
-body{
-  margin:0;
+body {
+  margin: 0;
   background: linear-gradient(to bottom, #fce4ec, #ffffff);
   font-family: 'Georgia', serif;
-  text-align:center;
-  padding-top:80px;
+  text-align: center;
+  padding-top: 50px;
 }
 
-/* Caja */
-.caja{
-  width:320px;
-  margin:0 auto;
-  position:relative;
-  cursor:pointer;
-  perspective:1000px;
+/* Cajita */
+.caja {
+  width: 320px;
+  margin: 20px auto;
+  background: #ff6f91;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
 }
 
-/* Tapa */
-.tapa{
-  width:320px;
-  height:70px;
-  background:#ff6f91;
-  border-radius:12px 12px 0 0;
-  transition: transform 1s;
-  transform-origin: bottom;
+input[type="password"] {
+  padding: 10px;
+  width: 70%;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
-/* Base */
-.base{
-  width:320px;
-  height:360px;
-  background:#ffc2d1;
-  border-radius:0 0 12px 12px;
-  padding:15px;
-  box-sizing:border-box;
-  overflow-y:auto;
+button {
+  padding: 10px 15px;
+  border: none;
+  background: #ffc2d1;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-/* Contenido oculto */
-.contenido{
-  opacity:0;
-  transition: opacity 1.5s;
-  font-size:14px;
+/* Secciones ocultas */
+.secciones {
+  display: none;
+  margin-top: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
-/* Animación */
-.abierta .tapa{
-  transform: rotateX(120deg);
+.seccion {
+  background: #fff0f5;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.2);
 }
 
-.abierta .contenido{
-  opacity:1;
+.seccion h3 {
+  margin-top: 0;
 }
 
-img{
-  width:220px;
-  border-radius:15px;
-  margin:10px 0;
-  box-shadow:0px 0px 15px rgba(0,0,0,0.3);
+img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 12px;
+  margin-top: 10px;
 }
 </style>
 </head>
-
 <body>
 
 <h1>Una Cajita Para Usted 💌</h1>
-<p>Haga clic en la cajita para abrirla 🤍</p>
 
-<div class="caja" onclick="abrirCaja(this)">
-  <div class="tapa"></div>
-
-  <div class="base">
-    <div class="contenido">
-
-      <h3>Para Usted 🤍</h3>
-
-      <img src="nosotros.jpeg">
-
-      <p><strong>Nuestro Inicio</strong></p>
-      <p>Desde aquel “hodi”, mi vida cambió completamente. No fue solo una palabra, fue el inicio de algo que jamás imaginé que se volvería tan importante para mí.</p>
-
-      <p><strong>Un Día Inolvidable</strong></p>
-      <p>El 26 de diciembre del 2025 conocí a sus padres. Me aceptaron como su novio y sentí que les caí muy bien. Ese día me sentí orgulloso, feliz, pleno. Fue uno de los mejores días de mi vida.</p>
-
-      <p><strong>El Mar</strong></p>
-      <p>El día que usted vio el mar, mi corazón se sintió completo. Ver su emoción, su sonrisa, su mirada… fue como cumplir una promesa silenciosa que guardaba desde hace tiempo.</p>
-
-      <p><strong>Lo Que Prometo</strong></p>
-      <p>Prometo cuidar su corazón como si fuera el mío. Prometo respetarla, valorarla y caminar a su lado incluso en los días difíciles.</p>
-
-      <p><strong>Nuestro Futuro</strong></p>
-      <p>Esto no es solo un recuerdo. Es una historia que quiero seguir escribiendo con usted, capítulo por capítulo, día tras día.</p>
-
-    </div>
-  </div>
+<div class="caja">
+  <p>Ingrese la contraseña para abrir la cajita:</p>
+  <input type="password" id="passInput" placeholder="Contraseña">
+  <button onclick="abrirCajita()">Abrir</button>
+  <p id="mensaje" style="color:red;"></p>
 </div>
 
-<audio id="musica" loop>
-  <source src="cancion.mp3" type="audio/mpeg">
-</audio>
+<div class="secciones" id="contenidoSecreto">
+
+  <!-- Sección 1: Carta -->
+  <div class="seccion">
+    <h3>Una Carta Guardada</h3>
+    <p><strong>Título:</strong> “Para cuando me extrañe”</p>
+    <ul>
+      <li>Que usted es su lugar seguro</li>
+      <li>Que siempre vuelve a ella</li>
+      <li>Que la distancia no cambia lo que siente</li>
+    </ul>
+  </div>
+
+  <!-- Sección 2: Recuerdo -->
+  <div class="seccion">
+    <h3>Un Recuerdo Encapsulado</h3>
+    <p>Imagen simbólica de:</p>
+    <ul>
+      <li>Tulipanes rojos 🌷</li>
+      <li>El mar 🌊</li>
+      <li>Globos del 14 de febrero 🎈</li>
+    </ul>
+    <p><em>“Este día fue cuando confirmé que usted es el amor de mi vida.”</em></p>
+    <img src="tulipanes.jpg" alt="Recuerdo">
+  </div>
+
+  <!-- Sección 3: Vale -->
+  <div class="seccion">
+    <h3>Un Vale Romántico</h3>
+    <p>Vale por:</p>
+    <ul>
+      <li>1000 besos</li>
+      <li>100 abrazos eternos</li>
+      <li>Una cita sorpresa</li>
+      <li>Volver a verla pronto</li>
+    </ul>
+  </div>
+
+  <!-- Sección 4: Promesa -->
+  <div class="seccion">
+    <h3>Una Promesa Sellada</h3>
+    <p>Prometo cuidar su corazón como si fuera el mío.</p>
+    <p>Prometo que cada viaje valdrá la pena.</p>
+    <p>Prometo seguir escribiendo nuestra historia.</p>
+    <p style="color:red; font-weight:bold;">💌 Promesa Eterna</p>
+  </div>
+
+</div>
 
 <script>
-function abrirCaja(elemento){
-  elemento.classList.toggle("abierta");
-  document.getElementById("musica").play();
+function abrirCajita() {
+  const input = document.getElementById("passInput").value;
+  const mensaje = document.getElementById("mensaje");
+  const contenido = document.getElementById("contenidoSecreto");
+
+  if(input === "22102025") {
+    contenido.style.display = "block";
+    mensaje.textContent = "";
+  } else {
+    mensaje.textContent = "Contraseña incorrecta 😢";
+    contenido.style.display = "none";
+  }
 }
 </script>
 
