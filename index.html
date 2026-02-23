@@ -2,119 +2,272 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<title>Para Usted 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ramo de Tulipanes</title>
 
 <style>
-/* === TODO TU CSS ORIGINAL SIN CAMBIOS VISUALES === */
-body {
-  margin: 0;
-  background: black;
-  overflow: hidden;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Georgia',serif}
+body{
+  background:#000;
+  color:#fff;
+  overflow:hidden;
 }
 
-/* fondo */
-.night{
+/* ---------- AUDIO ---------- */
+#audio{display:none}
+
+/* ---------- LOGIN ---------- */
+#login{
   position:fixed;
   inset:0;
-  background:url("https://i.pinimg.com/736x/12/10/b3/1210b30b8969bc9a0c93835ebedb1ba3.jpg") center/cover no-repeat;
-  z-index:0;
+  background:linear-gradient(135deg,#ff4d6d,#8b1e3f);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
 }
-
-/* partículas */
-.particles{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:3;
-}
-.particle{
-  position:absolute;
-  bottom:-10px;
-  width:6px;
-  height:6px;
-  background:white;
-  border-radius:50%;
-  opacity:.7;
-  animation: subir linear infinite;
-}
-@keyframes subir{
-  to{
-    transform:translateY(-110vh);
-    opacity:0;
-  }
-}
-
-/* texto */
-.special-text{
-  position:fixed;
-  top:5%;
-  width:100%;
+#loginBox{
+  background:rgba(0,0,0,.4);
+  padding:30px;
+  border-radius:20px;
   text-align:center;
-  color:white;
-  font-size:4vmin;
-  z-index:5;
-  text-shadow:0 0 20px #00eaff;
+}
+#login input{
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  margin-top:10px;
+}
+#login button{
+  margin-top:15px;
+  padding:10px 20px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
 }
 
-/* flores (se mantiene tu estructura) */
-.flowers{
-  position:relative;
-  z-index:2;
-  transform:scale(.7) translateY(-7vmin);
+/* ---------- NOSOTROS ---------- */
+#nosotros{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:900;
+}
+#nosotros img{
+  max-width:80%;
+  border-radius:20px;
+  box-shadow:0 0 40px pink;
 }
 
-/* ramo */
-.ramo{
+/* ---------- MENU ---------- */
+#menu{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,#1a002a,#000);
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+}
+.menu-btn{
+  width:160px;
+  height:160px;
+  background:rgba(255,255,255,.1);
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  cursor:pointer;
+  transition:.3s;
+}
+.menu-btn:hover{transform:scale(1.1)}
+
+/* ---------- SECCIONES ---------- */
+.section{
+  display:none;
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+}
+.back{
   position:absolute;
-  bottom:5vmin;
+  bottom:20px;
   left:50%;
   transform:translateX(-50%);
-  opacity:1;
+  padding:10px 20px;
+  border-radius:20px;
+  border:none;
+  cursor:pointer;
 }
-.ramo img{
-  width:60vmin;
+
+/* ---------- CARTA ---------- */
+#carta{
+  background:#000;
+}
+#carta img{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  max-width:70%;
+}
+#textoCarta{
+  position:absolute;
+  top:10%;
+  width:90%;
+  left:5%;
+  text-align:center;
+  font-size:18px;
+}
+
+/* ---------- PROMESA ---------- */
+#promesa{
+  background:radial-gradient(circle at top,#2b1055,#000);
+}
+
+/* ---------- RECUERDO ---------- */
+#recuerdo{
+  background:linear-gradient(#3a7d44,#1b3a2b);
+}
+#recuerdo .imagenes{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:20px;
+}
+#recuerdo img{
+  width:25%;
+  border-radius:15px;
+}
+
+/* ---------- EFECTOS ---------- */
+.fall{
+  position:absolute;
+  top:-50px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh)}
 }
 </style>
 </head>
 
 <body>
 
-<!-- AUDIO: SOLO TU CANCIÓN -->
-<audio id="audio" autoplay loop>
-  <source src="https://github.com/Baque2005/Organizador/raw/refs/heads/master/PUBLIC%20-%20Make%20You%20Mine%20%20Sub%20espa%C3%B1ol%20(lyrics).mp3" type="audio/mpeg">
-</audio>
+<audio id="audio" src="cancion.mp3" loop></audio>
 
-<div class="night"></div>
-<div class="particles"></div>
-
-<div class="special-text">
-  Estas flores rojas llevan el mismo fuego con el que pienso en usted
+<!-- LOGIN -->
+<div id="login">
+  <div id="loginBox">
+    <h2>Ingrese el código 💌</h2>
+    <input id="code" type="password">
+    <br>
+    <button onclick="enter()">Entrar</button>
+  </div>
 </div>
 
-<div class="flowers">
-  <!-- AQUÍ SIGUEN TODOS TUS TULIPANES SIN TOCAR -->
+<!-- NOSOTROS -->
+<div id="nosotros">
+  <img src="nosotros.jpeg">
 </div>
 
-<div class="ramo">
-  <img src="https://i.postimg.cc/QxCQJ4y3/unnamed.png">
+<!-- MENU -->
+<div id="menu">
+  <div class="menu-btn" onclick="openCarta()">💐 Carta</div>
+  <div class="menu-btn" onclick="openRecuerdo()">🌸 Recuerdo</div>
+  <div class="menu-btn" onclick="openPromesa()">✨ Promesa</div>
+</div>
+
+<!-- CARTA -->
+<div id="carta" class="section">
+  <div id="textoCarta">
+Mi amor,<br><br>
+No hay instante en el que no piense en usted...<br><br>
+<strong>Le amo May, muak.</strong>
+  </div>
+  <img src="tulipanes.png">
+  <button class="back" onclick="goMenu()">Menú principal</button>
+</div>
+
+<!-- RECUERDO -->
+<div id="recuerdo" class="section">
+  <h2 style="text-align:center;margin-top:20px">Usted es el amor de mi vida.</h2>
+  <div class="imagenes">
+    <img src="imagen1.jpg">
+    <img src="imagen2.jpg">
+    <img src="imagen3.jpg">
+    <img src="imagen4.jpg">
+  </div>
+  <button class="back" onclick="goMenu()">Menú principal</button>
+</div>
+
+<!-- PROMESA -->
+<div id="promesa" class="section">
+  <div style="text-align:center;margin-top:50px">
+    <p>Prometo cuidar su corazón como si fuera el mío.</p>
+    <p>Prometo que cada viaje valdrá la pena.</p>
+    <p>Prometo seguir escribiendo nuestra historia.</p>
+  </div>
+  <button class="back" onclick="goMenu()">Menú principal</button>
 </div>
 
 <script>
-/* partículas */
-const cont = document.querySelector(".particles");
-for(let i=0;i<40;i++){
-  const p=document.createElement("div");
-  p.className="particle";
-  p.style.left=Math.random()*100+"vw";
-  p.style.animationDuration=(3+Math.random()*4)+"s";
-  cont.appendChild(p);
+function enter(){
+  document.getElementById('login').style.display='none';
+  document.getElementById('audio').play();
+  document.getElementById('nosotros').style.display='flex';
+  setTimeout(()=>{
+    document.getElementById('nosotros').style.display='none';
+    document.getElementById('menu').style.display='flex';
+  },3000);
 }
 
-/* autoplay respaldo */
-document.body.addEventListener("click",()=>{
-  document.getElementById("audio").play();
-},{once:true});
+function openCarta(){
+  hideAll();
+  document.getElementById('carta').style.display='block';
+  lluvia("🌸");
+}
+
+function openRecuerdo(){
+  hideAll();
+  document.getElementById('recuerdo').style.display='block';
+  lluvia("❤️");
+}
+
+function openPromesa(){
+  hideAll();
+  document.getElementById('promesa').style.display='block';
+  lluvia("⭐");
+}
+
+function goMenu(){
+  hideAll();
+  document.getElementById('menu').style.display='flex';
+}
+
+function hideAll(){
+  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+  document.querySelectorAll('.fall').forEach(f=>f.remove());
+}
+
+function lluvia(simbolo){
+  for(let i=0;i<40;i++){
+    let e=document.createElement('div');
+    e.className='fall';
+    e.innerText=simbolo;
+    e.style.left=Math.random()*100+'%';
+    e.style.animationDuration=3+Math.random()*5+'s';
+    e.style.fontSize=20+Math.random()*20+'px';
+    document.body.appendChild(e);
+  }
+}
 </script>
 
 </body>
