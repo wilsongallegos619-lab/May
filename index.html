@@ -9,25 +9,12 @@
 body{
   margin:0;
   height:100vh;
-  font-family:'Georgia', serif;
-  background:linear-gradient(to bottom,#fdecef,#fff);
+  font-family:'Georgia',serif;
+  background:#fdecef;
   overflow:hidden;
 }
 
-/* FONDO ANIMADO */
-.corazones span{
-  position:absolute;
-  bottom:-50px;
-  animation:flotar linear infinite;
-  opacity:.7;
-}
-
-@keyframes flotar{
-  from{ transform:translateY(0); }
-  to{ transform:translateY(-120vh); }
-}
-
-/* CAJITA */
+/* ================= CAJITA ================= */
 #login{
   position:absolute;
   top:50%;
@@ -39,36 +26,16 @@ body{
   text-align:center;
   box-shadow:0 10px 25px rgba(0,0,0,.3);
 }
+#login input{padding:10px;border-radius:8px;border:none;}
+#login button{margin-top:10px;padding:10px;border:none;border-radius:8px;background:#ffd6e0;cursor:pointer;}
+#mensaje{color:#7a0019}
 
-#login input{
-  padding:10px;
-  width:200px;
-  border:none;
-  border-radius:8px;
-  margin-bottom:10px;
-}
-
-#login button{
-  padding:10px 15px;
-  border:none;
-  border-radius:8px;
-  background:#ffd6e0;
-  cursor:pointer;
-  font-size:16px;
-}
-
-#mensaje{
-  color:#7a0019;
-  margin-top:10px;
-}
-
-/* ESCENA */
+/* ================= ESCENA ================= */
 #escena{
   display:none;
   position:absolute;
   inset:0;
 }
-
 #escena img{
   position:absolute;
   top:50%;
@@ -76,16 +43,13 @@ body{
   transform:translate(-50%,-50%);
   max-width:300px;
   border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,.3);
   animation:latido 3s infinite;
 }
-
 @keyframes latido{
-  0%,100%{ transform:translate(-50%,-50%) scale(1); }
-  50%{ transform:translate(-50%,-50%) scale(1.05); }
+  50%{transform:translate(-50%,-50%) scale(1.05);}
 }
 
-/* MENU */
+/* ================= MENU ================= */
 .menu{
   position:absolute;
   width:120px;
@@ -99,34 +63,20 @@ body{
   cursor:pointer;
   box-shadow:0 5px 15px rgba(0,0,0,.2);
   font-weight:bold;
-  transition:transform .3s;
 }
+#btnCarta{top:15%;left:15%}
+#btnRecuerdo{top:15%;right:15%}
+#btnPromesa{bottom:15%;left:50%;transform:translateX(-50%)}
 
-.menu:hover{
-  transform:scale(1.1);
-}
-
-#btnCarta{ top:15%; left:15%; }
-#btnRecuerdo{ top:15%; right:15%; }
-#btnPromesa{ bottom:15%; left:50%; transform:translateX(-50%); }
-
-/* SECCIONES */
+/* ================= SECCIONES ================= */
 .seccion{
   display:none;
   position:absolute;
   inset:0;
-  background:#fdecef;
   padding:40px;
   text-align:center;
-  overflow-y:auto;
+  overflow:hidden;
 }
-
-.seccion img{
-  max-width:250px;
-  margin:10px;
-  border-radius:15px;
-}
-
 .volver{
   margin-top:20px;
   padding:10px 15px;
@@ -136,123 +86,209 @@ body{
   cursor:pointer;
 }
 
-/* SONIDO */
-#sonido{
-  position:fixed;
-  top:15px;
-  right:15px;
-  border:none;
-  background:#ffd6e0;
-  padding:10px;
+/* ================= CARTA — RAMO ================= */
+#carta{
+  background:linear-gradient(#ffe4e1,#ffb6c1);
+}
+
+.ramo{
+  position:relative;
+  width:300px;
+  height:300px;
+  margin:20px auto;
+}
+
+.tulipan{
+  position:absolute;
+  bottom:0;
+  width:20px;
+  height:80px;
+  background:green;
+  left:50%;
+  transform-origin:bottom;
+  animation:mecer 4s infinite ease-in-out;
+}
+
+@keyframes mecer{
+  50%{transform:rotate(5deg);}
+}
+
+.flor{
+  position:absolute;
+  top:-25px;
+  left:-10px;
+  width:40px;
+  height:40px;
+  background:red;
+  border-radius:50% 50% 40% 40%;
+}
+
+.flor::before,
+.flor::after{
+  content:"";
+  position:absolute;
+  width:40px;
+  height:40px;
+  background:red;
   border-radius:50%;
-  cursor:pointer;
+}
+.flor::before{left:-15px;}
+.flor::after{right:-15px;}
+
+/* ================= PETALOS ================= */
+.petalo{
+  position:absolute;
+  top:-30px;
+  color:pink;
+  animation:caer 7s linear infinite;
+}
+@keyframes caer{
+  to{transform:translateY(120vh) rotate(360deg);}
+}
+
+/* ================= RECUERDO — CAMPO ================= */
+#recuerdo{
+  background:linear-gradient(#87ceeb,#7cfc00);
+}
+
+.campo{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:50%;
+  display:flex;
+  justify-content:space-around;
+}
+
+.florCampo{
+  width:20px;
+  height:20px;
+  background:yellow;
+  border-radius:50%;
+  position:relative;
+}
+.florCampo::after{
+  content:"";
+  position:absolute;
+  width:6px;
+  height:40px;
+  background:green;
+  top:20px;
+  left:7px;
+}
+
+/* ================= PROMESA — GALAXIA ================= */
+#promesa{
+  background:radial-gradient(circle,#1b2735,#090a0f);
+  color:white;
+}
+
+.estrella{
+  position:absolute;
+  top:-10px;
+  color:white;
+  animation:estrella 6s linear infinite;
+}
+@keyframes estrella{
+  to{transform:translateY(120vh);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- FONDO -->
-<div class="corazones"></div>
-
-<!-- CAJITA -->
 <div id="login">
   <h2>Una Cajita Para Usted 💌</h2>
-  <p>Ingrese la contraseña</p>
   <input type="password" id="pass">
   <br>
   <button onclick="abrir()">Abrir</button>
   <p id="mensaje"></p>
 </div>
 
-<!-- AUDIO -->
 <audio id="musica" loop>
-  <source src="cancion.mp3" type="audio/mpeg">
+  <source src="cancion.mp3">
 </audio>
 
-<button id="sonido">🔊</button>
-
-<!-- ESCENA PRINCIPAL -->
 <div id="escena">
   <img src="nosotros.jpeg">
-
-  <div class="menu" id="btnCarta" onclick="mostrar('carta')">💌<br>Carta</div>
-  <div class="menu" id="btnRecuerdo" onclick="mostrar('recuerdo')">📸<br>Recuerdo</div>
-  <div class="menu" id="btnPromesa" onclick="mostrar('promesa')">🤍<br>Promesa</div>
+  <div class="menu" id="btnCarta" onclick="mostrar('carta')">💌 Carta</div>
+  <div class="menu" id="btnRecuerdo" onclick="mostrar('recuerdo')">🌸 Recuerdo</div>
+  <div class="menu" id="btnPromesa" onclick="mostrar('promesa')">🌌 Promesa</div>
 </div>
 
 <!-- CARTA -->
 <div class="seccion" id="carta">
-  <h2>Una Carta Guardada</h2>
-  <p>
-    Quiero que sepa que cada pensamiento sobre usted ilumina mis días y hace que todo a mi alrededor
-    se sienta más hermoso. Gracias por ser alguien tan especial en mi vida; su presencia hace que
-    todo valga la pena.
-  </p>
+  <div class="ramo" id="ramo"></div>
+  <p>Quiero que sepa que cada pensamiento sobre usted ilumina mis días...</p>
   <button class="volver" onclick="volver()">Menú principal</button>
 </div>
 
 <!-- RECUERDO -->
 <div class="seccion" id="recuerdo">
-  <h2>Un Recuerdo Encapsulado</h2>
-  <p><strong>“Usted es el amor de mi vida.”</strong></p>
-  <img src="imagen1.jpg">
-  <img src="imagen2.jpg">
-  <img src="imagen3.jpg">
-  <br>
+  <div class="campo" id="campo"></div>
+  <p><strong>Usted es el amor de mi vida.</strong></p>
   <button class="volver" onclick="volver()">Menú principal</button>
 </div>
 
 <!-- PROMESA -->
 <div class="seccion" id="promesa">
-  <h2>Una Promesa Sellada</h2>
   <p>Prometo cuidar su corazón como si fuera el mío.</p>
-  <p>Prometo que cada viaje valdrá la pena.</p>
-  <p>Prometo seguir escribiendo nuestra historia.</p>
-  <img src="imagen4.jpg">
-  <br>
   <button class="volver" onclick="volver()">Menú principal</button>
 </div>
 
 <script>
-/* CORAZONES */
-setInterval(()=>{
-  const c=document.createElement("span");
-  c.textContent="❤️";
-  c.style.left=Math.random()*100+"vw";
-  c.style.fontSize=12+Math.random()*20+"px";
-  c.style.animationDuration=6+Math.random()*6+"s";
-  document.querySelector(".corazones").appendChild(c);
-  setTimeout(()=>c.remove(),12000);
-},500);
-
-/* LOGIN */
 function abrir(){
-  if(document.getElementById("pass").value==="22102025"){
-    document.getElementById("login").style.display="none";
-    document.getElementById("escena").style.display="block";
-    document.getElementById("musica").play();
-  }else{
-    document.getElementById("mensaje").textContent="Contraseña incorrecta 😢";
-  }
+  if(pass.value==="22102025"){
+    login.style.display="none";
+    escena.style.display="block";
+    musica.play();
+  }else mensaje.textContent="Contraseña incorrecta 😢";
 }
 
-/* NAVEGACION */
 function mostrar(id){
-  document.getElementById("escena").style.display="none";
+  escena.style.display="none";
   document.getElementById(id).style.display="block";
+  if(id==="carta") crearRamo();
+  if(id==="recuerdo") crearCampo();
+  if(id==="promesa") estrellas();
 }
 
 function volver(){
   document.querySelectorAll(".seccion").forEach(s=>s.style.display="none");
-  document.getElementById("escena").style.display="block";
+  escena.style.display="block";
 }
 
-/* SONIDO */
-document.getElementById("sonido").onclick=()=>{
-  const m=document.getElementById("musica");
-  m.muted=!m.muted;
-};
+function crearRamo(){
+  ramo.innerHTML="";
+  for(let i=0;i<7;i++){
+    const t=document.createElement("div");
+    t.className="tulipan";
+    t.style.left=40+i*30+"px";
+    t.style.animationDelay=i*.3+"s";
+    t.innerHTML='<div class="flor"></div>';
+    ramo.appendChild(t);
+  }
+}
+
+function crearCampo(){
+  campo.innerHTML="";
+  for(let i=0;i<12;i++){
+    const f=document.createElement("div");
+    f.className="florCampo";
+    campo.appendChild(f);
+  }
+}
+
+function estrellas(){
+  setInterval(()=>{
+    const e=document.createElement("div");
+    e.className="estrella";
+    e.textContent="✦";
+    e.style.left=Math.random()*100+"vw";
+    document.getElementById("promesa").appendChild(e);
+    setTimeout(()=>e.remove(),6000);
+  },300);
+}
 </script>
 
 </body>
