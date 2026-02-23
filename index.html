@@ -9,19 +9,33 @@
 body{
   margin:0;
   height:100vh;
-  font-family: 'Georgia', serif;
-  background:#fdecef;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  font-family:'Georgia', serif;
+  background:linear-gradient(to bottom,#fdecef,#fff);
   overflow:hidden;
 }
 
-/* ---------- CAJITA ---------- */
+/* FONDO ANIMADO */
+.corazones span{
+  position:absolute;
+  bottom:-50px;
+  animation:flotar linear infinite;
+  opacity:.7;
+}
+
+@keyframes flotar{
+  from{ transform:translateY(0); }
+  to{ transform:translateY(-120vh); }
+}
+
+/* CAJITA */
 #login{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
   background:#ff6f91;
-  padding:25px;
-  border-radius:15px;
+  padding:30px;
+  border-radius:20px;
   text-align:center;
   box-shadow:0 10px 25px rgba(0,0,0,.3);
 }
@@ -30,16 +44,17 @@ body{
   padding:10px;
   width:200px;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   margin-bottom:10px;
 }
 
 #login button{
   padding:10px 15px;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   background:#ffd6e0;
   cursor:pointer;
+  font-size:16px;
 }
 
 #mensaje{
@@ -47,12 +62,11 @@ body{
   margin-top:10px;
 }
 
-/* ---------- ESCENA PRINCIPAL ---------- */
+/* ESCENA */
 #escena{
   display:none;
-  position:relative;
-  width:100%;
-  height:100%;
+  position:absolute;
+  inset:0;
 }
 
 #escena img{
@@ -61,17 +75,23 @@ body{
   left:50%;
   transform:translate(-50%,-50%);
   max-width:300px;
-  border-radius:15px;
+  border-radius:20px;
   box-shadow:0 10px 25px rgba(0,0,0,.3);
+  animation:latido 3s infinite;
 }
 
-/* ---------- MENU ---------- */
+@keyframes latido{
+  0%,100%{ transform:translate(-50%,-50%) scale(1); }
+  50%{ transform:translate(-50%,-50%) scale(1.05); }
+}
+
+/* MENU */
 .menu{
   position:absolute;
   width:120px;
   height:120px;
   background:#fff0f5;
-  border-radius:15px;
+  border-radius:20px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -79,13 +99,18 @@ body{
   cursor:pointer;
   box-shadow:0 5px 15px rgba(0,0,0,.2);
   font-weight:bold;
+  transition:transform .3s;
 }
 
-#btnCarta{ top:15%; left:20%; }
-#btnRecuerdo{ top:15%; right:20%; }
+.menu:hover{
+  transform:scale(1.1);
+}
+
+#btnCarta{ top:15%; left:15%; }
+#btnRecuerdo{ top:15%; right:15%; }
 #btnPromesa{ bottom:15%; left:50%; transform:translateX(-50%); }
 
-/* ---------- SECCIONES ---------- */
+/* SECCIONES */
 .seccion{
   display:none;
   position:absolute;
@@ -93,26 +118,42 @@ body{
   background:#fdecef;
   padding:40px;
   text-align:center;
+  overflow-y:auto;
 }
 
 .seccion img{
   max-width:250px;
   margin:10px;
-  border-radius:12px;
+  border-radius:15px;
 }
 
 .volver{
   margin-top:20px;
   padding:10px 15px;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   background:#ffb3c6;
+  cursor:pointer;
+}
+
+/* SONIDO */
+#sonido{
+  position:fixed;
+  top:15px;
+  right:15px;
+  border:none;
+  background:#ffd6e0;
+  padding:10px;
+  border-radius:50%;
   cursor:pointer;
 }
 </style>
 </head>
 
 <body>
+
+<!-- FONDO -->
+<div class="corazones"></div>
 
 <!-- CAJITA -->
 <div id="login">
@@ -129,9 +170,11 @@ body{
   <source src="cancion.mp3" type="audio/mpeg">
 </audio>
 
+<button id="sonido">🔊</button>
+
 <!-- ESCENA PRINCIPAL -->
 <div id="escena">
-  <img src="nosotros.jpeg" alt="Nosotros">
+  <img src="nosotros.jpeg">
 
   <div class="menu" id="btnCarta" onclick="mostrar('carta')">💌<br>Carta</div>
   <div class="menu" id="btnRecuerdo" onclick="mostrar('recuerdo')">📸<br>Recuerdo</div>
@@ -142,9 +185,9 @@ body{
 <div class="seccion" id="carta">
   <h2>Una Carta Guardada</h2>
   <p>
-    Quiero que sepa que cada pensamiento sobre usted ilumina mis días y hace que todo
-    a mi alrededor se sienta más hermoso. Gracias por ser alguien tan especial en mi vida;
-    su presencia hace que todo valga la pena.
+    Quiero que sepa que cada pensamiento sobre usted ilumina mis días y hace que todo a mi alrededor
+    se sienta más hermoso. Gracias por ser alguien tan especial en mi vida; su presencia hace que
+    todo valga la pena.
   </p>
   <button class="volver" onclick="volver()">Menú principal</button>
 </div>
@@ -172,9 +215,20 @@ body{
 </div>
 
 <script>
+/* CORAZONES */
+setInterval(()=>{
+  const c=document.createElement("span");
+  c.textContent="❤️";
+  c.style.left=Math.random()*100+"vw";
+  c.style.fontSize=12+Math.random()*20+"px";
+  c.style.animationDuration=6+Math.random()*6+"s";
+  document.querySelector(".corazones").appendChild(c);
+  setTimeout(()=>c.remove(),12000);
+},500);
+
+/* LOGIN */
 function abrir(){
-  const pass = document.getElementById("pass").value;
-  if(pass === "22102025"){
+  if(document.getElementById("pass").value==="22102025"){
     document.getElementById("login").style.display="none";
     document.getElementById("escena").style.display="block";
     document.getElementById("musica").play();
@@ -183,6 +237,7 @@ function abrir(){
   }
 }
 
+/* NAVEGACION */
 function mostrar(id){
   document.getElementById("escena").style.display="none";
   document.getElementById(id).style.display="block";
@@ -192,6 +247,12 @@ function volver(){
   document.querySelectorAll(".seccion").forEach(s=>s.style.display="none");
   document.getElementById("escena").style.display="block";
 }
+
+/* SONIDO */
+document.getElementById("sonido").onclick=()=>{
+  const m=document.getElementById("musica");
+  m.muted=!m.muted;
+};
 </script>
 
 </body>
