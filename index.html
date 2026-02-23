@@ -2,292 +2,306 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Una Cajita Para Usted 💌</title>
 
 <style>
-body{
-  margin:0;
-  height:100vh;
-  font-family:'Georgia',serif;
-  background:#fdecef;
-  overflow:hidden;
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(to bottom, #fce4ec, #ffffff);
+  text-align: center;
+  overflow-x: hidden;
 }
 
-/* ================= CAJITA ================= */
-#login{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:#ff6f91;
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
-  box-shadow:0 10px 25px rgba(0,0,0,.3);
-}
-#login input{padding:10px;border-radius:8px;border:none;}
-#login button{margin-top:10px;padding:10px;border:none;border-radius:8px;background:#ffd6e0;cursor:pointer;}
-#mensaje{color:#7a0019}
-
-/* ================= ESCENA ================= */
-#escena{
-  display:none;
-  position:absolute;
-  inset:0;
-}
-#escena img{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  max-width:300px;
-  border-radius:20px;
-  animation:latido 3s infinite;
-}
-@keyframes latido{
-  50%{transform:translate(-50%,-50%) scale(1.05);}
+/* ---------- CAJITA ---------- */
+.caja {
+  width: 320px;
+  margin: 60px auto;
+  background: #ff6f91;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-/* ================= MENU ================= */
-.menu{
-  position:absolute;
-  width:120px;
-  height:120px;
-  background:#fff0f5;
-  border-radius:20px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  cursor:pointer;
-  box-shadow:0 5px 15px rgba(0,0,0,.2);
-  font-weight:bold;
-}
-#btnCarta{top:15%;left:15%}
-#btnRecuerdo{top:15%;right:15%}
-#btnPromesa{bottom:15%;left:50%;transform:translateX(-50%)}
-
-/* ================= SECCIONES ================= */
-.seccion{
-  display:none;
-  position:absolute;
-  inset:0;
-  padding:40px;
-  text-align:center;
-  overflow:hidden;
-}
-.volver{
-  margin-top:20px;
-  padding:10px 15px;
-  border:none;
-  border-radius:8px;
-  background:#ffb3c6;
-  cursor:pointer;
+input, button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  margin-top: 10px;
 }
 
-/* ================= CARTA — RAMO ================= */
-#carta{
-  background:linear-gradient(#ffe4e1,#ffb6c1);
+button {
+  background: #ffc2d1;
+  cursor: pointer;
 }
 
-.ramo{
-  position:relative;
-  width:300px;
-  height:300px;
-  margin:20px auto;
+/* ---------- CONTENIDO PRINCIPAL ---------- */
+#principal {
+  display: none;
 }
 
-.tulipan{
-  position:absolute;
-  bottom:0;
-  width:20px;
-  height:80px;
-  background:green;
-  left:50%;
-  transform-origin:bottom;
-  animation:mecer 4s infinite ease-in-out;
+#imagenCentral {
+  width: 300px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  margin: 30px auto;
 }
 
-@keyframes mecer{
-  50%{transform:rotate(5deg);}
+/* ---------- MENU ---------- */
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.flor{
-  position:absolute;
-  top:-25px;
-  left:-10px;
-  width:40px;
-  height:40px;
-  background:red;
-  border-radius:50% 50% 40% 40%;
+.opcion {
+  width: 180px;
+  padding: 20px;
+  background: #fff0f5;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: transform .3s;
 }
 
-.flor::before,
-.flor::after{
-  content:"";
-  position:absolute;
-  width:40px;
-  height:40px;
-  background:red;
-  border-radius:50%;
-}
-.flor::before{left:-15px;}
-.flor::after{right:-15px;}
-
-/* ================= PETALOS ================= */
-.petalo{
-  position:absolute;
-  top:-30px;
-  color:pink;
-  animation:caer 7s linear infinite;
-}
-@keyframes caer{
-  to{transform:translateY(120vh) rotate(360deg);}
+.opcion:hover {
+  transform: scale(1.08);
 }
 
-/* ================= RECUERDO — CAMPO ================= */
-#recuerdo{
-  background:linear-gradient(#87ceeb,#7cfc00);
+/* ---------- SECCIONES ---------- */
+.seccion {
+  display: none;
+  min-height: 100vh;
+  padding: 40px 20px;
+  position: relative;
+  color: white;
 }
 
-.campo{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  height:50%;
-  display:flex;
-  justify-content:space-around;
+.boton {
+  margin-top: 30px;
+  background: white;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
-.florCampo{
-  width:20px;
-  height:20px;
-  background:yellow;
-  border-radius:50%;
-  position:relative;
-}
-.florCampo::after{
-  content:"";
-  position:absolute;
-  width:6px;
-  height:40px;
-  background:green;
-  top:20px;
-  left:7px;
+/* ---------- CARTA ---------- */
+#carta {
+  background: linear-gradient(#ffb6c1, #ff69b4);
 }
 
-/* ================= PROMESA — GALAXIA ================= */
-#promesa{
-  background:radial-gradient(circle,#1b2735,#090a0f);
-  color:white;
+/* tulipanes */
+.ramo {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
 }
 
-.estrella{
-  position:absolute;
-  top:-10px;
-  color:white;
-  animation:estrella 6s linear infinite;
+.tulipan {
+  width: 30px;
+  height: 60px;
+  background: radial-gradient(circle, red, darkred);
+  border-radius: 50% 50% 40% 40%;
+  margin: 5px;
+  animation: balanceo 3s ease-in-out infinite;
 }
-@keyframes estrella{
-  to{transform:translateY(120vh);}
+
+@keyframes balanceo {
+  0%,100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
 }
+
+/* petalos */
+.petalo {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: pink;
+  border-radius: 50%;
+  top: -20px;
+  animation: caer 6s linear infinite;
+}
+
+@keyframes caer {
+  to { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* ---------- RECUERDO ---------- */
+#recuerdo {
+  background: linear-gradient(#2ecc71, #27ae60);
+}
+
+.corazon {
+  position: absolute;
+  color: pink;
+  font-size: 20px;
+  top: -20px;
+  animation: caer 5s linear infinite;
+}
+
+.galeria img {
+  width: 200px;
+  border-radius: 15px;
+  margin: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* ---------- PROMESA ---------- */
+#promesa {
+  background: radial-gradient(circle at top, #3b1d5c, #000);
+}
+
+.estrella {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  animation: brillo 2s infinite alternate;
+}
+
+@keyframes brillo {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+#promesa img {
+  width: 250px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+/* ---------- AUDIO ---------- */
+audio { display: none; }
+
 </style>
 </head>
 
 <body>
 
-<div id="login">
-  <h2>Una Cajita Para Usted 💌</h2>
+<h1>Una Cajita Para Usted 💌</h1>
+
+<div class="caja" id="login">
+  <p>Ingrese la contraseña:</p>
   <input type="password" id="pass">
-  <br>
   <button onclick="abrir()">Abrir</button>
-  <p id="mensaje"></p>
+  <p id="msg" style="color:white;"></p>
 </div>
 
-<audio id="musica" loop>
-  <source src="cancion.mp3">
-</audio>
+<audio id="musica" src="cancion.mp3" loop></audio>
 
-<div id="escena">
-  <img src="nosotros.jpeg">
-  <div class="menu" id="btnCarta" onclick="mostrar('carta')">💌 Carta</div>
-  <div class="menu" id="btnRecuerdo" onclick="mostrar('recuerdo')">🌸 Recuerdo</div>
-  <div class="menu" id="btnPromesa" onclick="mostrar('promesa')">🌌 Promesa</div>
+<div id="principal">
+  <img id="imagenCentral" src="nosotros.jpeg">
+
+  <div class="menu">
+    <div class="opcion" onclick="mostrar('carta')">💌 Carta</div>
+    <div class="opcion" onclick="mostrar('recuerdo')">🌼 Recuerdo</div>
+    <div class="opcion" onclick="mostrar('promesa')">🌌 Promesa</div>
+  </div>
 </div>
 
 <!-- CARTA -->
-<div class="seccion" id="carta">
-  <div class="ramo" id="ramo"></div>
-  <p>Quiero que sepa que cada pensamiento sobre usted ilumina mis días...</p>
-  <button class="volver" onclick="volver()">Menú principal</button>
+<div id="carta" class="seccion">
+  <h2>Una Carta Guardada</h2>
+
+  <div class="ramo">
+    <div class="tulipan"></div>
+    <div class="tulipan"></div>
+    <div class="tulipan"></div>
+    <div class="tulipan"></div>
+    <div class="tulipan"></div>
+  </div>
+
+  <p>
+    Quiero que sepa que cada pensamiento sobre usted ilumina mis días y hace que
+    todo a mi alrededor se sienta más hermoso. Gracias por ser alguien tan especial
+    en mi vida; su presencia hace que todo valga la pena.
+  </p>
+
+  <div class="boton" onclick="volver()">Menú principal</div>
 </div>
 
 <!-- RECUERDO -->
-<div class="seccion" id="recuerdo">
-  <div class="campo" id="campo"></div>
-  <p><strong>Usted es el amor de mi vida.</strong></p>
-  <button class="volver" onclick="volver()">Menú principal</button>
+<div id="recuerdo" class="seccion">
+  <h2>Un Recuerdo Encapsulado</h2>
+  <p>“Usted es el amor de mi vida.”</p>
+
+  <div class="galeria">
+    <img src="imagen1.jpg">
+    <img src="imagen2.jpg">
+    <img src="imagen3.jpg">
+  </div>
+
+  <div class="boton" onclick="volver()">Menú principal</div>
 </div>
 
 <!-- PROMESA -->
-<div class="seccion" id="promesa">
+<div id="promesa" class="seccion">
+  <h2>Una Promesa Sellada</h2>
+
   <p>Prometo cuidar su corazón como si fuera el mío.</p>
-  <button class="volver" onclick="volver()">Menú principal</button>
+  <p>Prometo que cada viaje valdrá la pena.</p>
+  <p>Prometo seguir escribiendo nuestra historia.</p>
+
+  <img src="imagen4.jpg">
+
+  <div class="boton" onclick="volver()">Menú principal</div>
 </div>
 
 <script>
 function abrir(){
-  if(pass.value==="22102025"){
-    login.style.display="none";
-    escena.style.display="block";
-    musica.play();
-  }else mensaje.textContent="Contraseña incorrecta 😢";
+  if(document.getElementById("pass").value === "22102025"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("principal").style.display="block";
+    document.getElementById("musica").play();
+  } else {
+    document.getElementById("msg").textContent="Contraseña incorrecta 😢";
+  }
 }
 
 function mostrar(id){
-  escena.style.display="none";
+  document.getElementById("principal").style.display="none";
+  document.querySelectorAll('.seccion').forEach(s=>s.style.display="none");
   document.getElementById(id).style.display="block";
-  if(id==="carta") crearRamo();
-  if(id==="recuerdo") crearCampo();
-  if(id==="promesa") estrellas();
+  efectos(id);
 }
 
 function volver(){
-  document.querySelectorAll(".seccion").forEach(s=>s.style.display="none");
-  escena.style.display="block";
+  document.querySelectorAll('.seccion').forEach(s=>s.style.display="none");
+  document.getElementById("principal").style.display="block";
 }
 
-function crearRamo(){
-  ramo.innerHTML="";
-  for(let i=0;i<7;i++){
-    const t=document.createElement("div");
-    t.className="tulipan";
-    t.style.left=40+i*30+"px";
-    t.style.animationDelay=i*.3+"s";
-    t.innerHTML='<div class="flor"></div>';
-    ramo.appendChild(t);
+function efectos(id){
+  if(id==="carta"){
+    for(let i=0;i<20;i++){
+      let p=document.createElement("div");
+      p.className="petalo";
+      p.style.left=Math.random()*100+"%";
+      document.getElementById(id).appendChild(p);
+    }
   }
-}
-
-function crearCampo(){
-  campo.innerHTML="";
-  for(let i=0;i<12;i++){
-    const f=document.createElement("div");
-    f.className="florCampo";
-    campo.appendChild(f);
+  if(id==="recuerdo"){
+    for(let i=0;i<20;i++){
+      let c=document.createElement("div");
+      c.className="corazon";
+      c.innerHTML="❤";
+      c.style.left=Math.random()*100+"%";
+      document.getElementById(id).appendChild(c);
+    }
   }
-}
-
-function estrellas(){
-  setInterval(()=>{
-    const e=document.createElement("div");
-    e.className="estrella";
-    e.textContent="✦";
-    e.style.left=Math.random()*100+"vw";
-    document.getElementById("promesa").appendChild(e);
-    setTimeout(()=>e.remove(),6000);
-  },300);
+  if(id==="promesa"){
+    for(let i=0;i<60;i++){
+      let e=document.createElement("div");
+      e.className="estrella";
+      e.style.top=Math.random()*100+"%";
+      e.style.left=Math.random()*100+"%";
+      document.getElementById(id).appendChild(e);
+    }
+  }
 }
 </script>
 
