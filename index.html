@@ -5,7 +5,6 @@
 <title>Una Cajita Para Usted 💌</title>
 
 <style>
-*{box-sizing:border-box;}
 body{
   margin:0;
   font-family:'Georgia',serif;
@@ -14,47 +13,40 @@ body{
   overflow-x:hidden;
 }
 
-/* 🎵 Música */
-audio{display:none;}
-
-/* 💗 Corazones cayendo */
+/* partículas */
 .particle{
   position:fixed;
   top:-50px;
-  font-size:20px;
-  animation:fall linear infinite;
   pointer-events:none;
+  animation:fall linear infinite;
+  z-index:5;
 }
 @keyframes fall{
   to{transform:translateY(110vh);}
 }
 
-/* 🔐 Pantalla inicial */
+/* login */
 #login{
-  margin-top:80px;
-}
-#login img{
-  width:280px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,.3);
+  margin-top:120px;
 }
 input,button{
   padding:10px;
   border-radius:8px;
   border:none;
-  margin:10px;
   font-size:16px;
 }
-button{cursor:pointer;background:#ffb6c1;}
+button{
+  background:#ffb6c1;
+  cursor:pointer;
+}
 
-/* 🧭 Menú */
+/* menu */
 #menu{
   display:none;
   margin-top:40px;
 }
 .menu-grid{
   display:flex;
-  flex-wrap:wrap;
   justify-content:center;
   gap:20px;
 }
@@ -63,91 +55,96 @@ button{cursor:pointer;background:#ffb6c1;}
   height:120px;
   background:#fff0f5;
   border-radius:16px;
-  box-shadow:0 5px 15px rgba(0,0,0,.2);
   display:flex;
   align-items:center;
   justify-content:center;
   cursor:pointer;
   font-weight:bold;
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
 }
 
-/* 📄 Secciones */
+/* secciones */
 .section{
   display:none;
   min-height:100vh;
   padding:40px 20px;
-  color:white;
-  position:relative;
 }
 .back{
   margin-top:30px;
-  background:white;
+  padding:10px 16px;
 }
 
-/* 🌷 Carta */
+/* carta */
 #carta{
   background:#ffe4ec;
-  color:#4a2a2a;
 }
-#tulipan iframe{
+#carta iframe{
   width:100%;
   height:420px;
   border:none;
 }
 
-/* 🌸 Recuerdo */
+/* recuerdo */
 #recuerdo{
-  background:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6') center/cover;
+  background:#fff7fb;
 }
-
-/* 🌌 Promesa */
-#promesa{
-  background:url('https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3') center/cover;
-}
-
-/* 📸 Galería */
 .gallery img{
   width:220px;
   border-radius:14px;
   margin:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,.4);
+  box-shadow:0 5px 15px rgba(0,0,0,.3);
+}
+
+/* promesa */
+#promesa{
+  background:url("https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3") center/cover;
+  color:white;
 }
 </style>
 </head>
 
 <body>
 
-<audio autoplay loop>
+<audio id="music" loop>
   <source src="cancion.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 💗 partículas -->
 <script>
-function particle(symbol){
+let effectInterval=null;
+
+function drop(symbol){
   const p=document.createElement("div");
   p.className="particle";
   p.textContent=symbol;
   p.style.left=Math.random()*100+"vw";
-  p.style.animationDuration=(3+Math.random()*5)+"s";
+  p.style.fontSize=(16+Math.random()*20)+"px";
+  p.style.animationDuration=(3+Math.random()*4)+"s";
   document.body.appendChild(p);
-  setTimeout(()=>p.remove(),8000);
+  setTimeout(()=>p.remove(),7000);
 }
-setInterval(()=>particle("💗"),600);
+
+function startEffect(symbol){
+  clearInterval(effectInterval);
+  effectInterval=setInterval(()=>drop(symbol),500);
+}
+function stopEffect(){
+  clearInterval(effectInterval);
+}
 </script>
 
-<!-- 🔐 LOGIN -->
+<!-- LOGIN -->
 <div id="login">
   <h1>Una Cajita Para Usted 💌</h1>
-  <img src="nosotros.jpeg">
-  <br>
   <input type="password" id="pass" placeholder="Contraseña">
+  <br><br>
   <button onclick="entrar()">Abrir</button>
   <p id="msg" style="color:red;"></p>
 </div>
 
-<!-- 🧭 MENU -->
+<!-- MENU -->
 <div id="menu">
-  <h2>Elija un recuerdo 💞</h2>
+  <img src="nosotros.jpg" width="260" style="border-radius:16px;box-shadow:0 5px 15px rgba(0,0,0,.3);"><br><br>
+
   <div class="menu-grid">
     <div class="menu-btn" onclick="openSec('carta')">💌 Carta</div>
     <div class="menu-btn" onclick="openSec('recuerdo')">🌸 Recuerdo</div>
@@ -155,41 +152,53 @@ setInterval(()=>particle("💗"),600);
   </div>
 </div>
 
-<!-- 💌 CARTA -->
+<!-- CARTA -->
 <div id="carta" class="section">
-  <div id="tulipan">
-    <iframe src="https://baque2005.github.io/public-files/2025/10/cccf762d-04b9-41a9-b6f3-5b0eab95d6e1.html"></iframe>
-  </div>
+  <iframe src="https://baque2005.github.io/public-files/2025/10/cccf762d-04b9-41a9-b6f3-5b0eab95d6e1.html"></iframe>
 
-  <p style="max-width:700px;margin:auto;font-size:18px;">
-Mi amor,<br><br>
-No hay instante en el que no piense en usted...  
-<br><br>
-<b>Le amo May, muak.</b>
+  <p style="max-width:760px;margin:auto;font-size:18px;color:#4a2a2a;">
+    Mi amor,<br><br>
+    No hay instante en el que no piense en usted. Desde que llegó a mi vida, todo adquirió un significado distinto, más intenso, más verdadero. Amarle no fue una decisión; fue un destino que se impuso con dulzura, con fuerza y con una certeza que jamás había sentido antes. Le amo con una profundidad que las palabras apenas logran rozar, pero aun así deseo intentarlo, porque usted merece saberlo.<br><br>
+
+    Le amo en cada pensamiento silencioso, en cada latido que se acelera cuando imagino su mirada. Le amo en la calma que me regala su presencia y en la ansiedad hermosa que siento cuando no está. Usted es esa persona que, sin proponérselo, se volvió indispensable, esa razón por la que el mundo parece un lugar más amable.<br><br>
+
+    Cuando me besa, el tiempo pierde sentido. En esos besos encuentro refugio, promesas y una conexión que va más allá de lo físico. Me besa y todo se detiene; me besa y comprendo que el amor verdadero sí existe. Sus labios tienen la capacidad de hacerme sentir en casa, de hacerme olvidar cualquier temor, de recordarme que pertenezco a usted.<br><br>
+
+    Le amo por lo que es y por lo que despierta en mí. Por su forma de sentir, de mirar, de existir. Le amo por su voz, que calma mis tormentas, y por su silencio, que también sabe abrazar. Le amo incluso en los momentos difíciles, porque amarle no depende de circunstancias, sino de una convicción profunda y honesta.<br><br>
+
+    No le prometo un amor perfecto, pero sí uno sincero. Un amor que le respeta, que le cuida, que le admira y que le elige cada día.<br><br>
+
+    <b>Con todo mi corazón,<br>Le amo May, muak.</b>
   </p>
+
   <button class="back" onclick="back()">Menú principal</button>
 </div>
 
-<!-- 🌸 RECUERDO -->
+<!-- RECUERDO -->
 <div id="recuerdo" class="section">
   <h2>Usted es el amor de mi vida.</h2>
+
   <div class="gallery">
-    <img src="imagen1.jpeg">
-    <img src="imagen2.jpeg">
-    <img src="imagen3.jpeg">
+    <img src="imagen1.jpg">
+    <img src="imagen2.jpg">
+    <img src="imagen3.jpg">
   </div>
+
   <button class="back" onclick="back()">Menú principal</button>
 </div>
 
-<!-- 🌌 PROMESA -->
+<!-- PROMESA -->
 <div id="promesa" class="section">
   <h2>Una Promesa Sellada</h2>
   <p>
-Prometo cuidar su corazón como si fuera el mío.<br>
-Prometo que cada viaje valdrá la pena.<br>
-Prometo seguir escribiendo nuestra historia.
+    Prometo cuidar su corazón como si fuera el mío.<br>
+    Prometo que cada viaje valdrá la pena.<br>
+    Prometo seguir escribiendo nuestra historia.
   </p>
-  <img src="imagen4.jpeg" style="width:260px;border-radius:16px;">
+
+  <img src="imagen4.jpg" width="260" style="border-radius:16px;box-shadow:0 5px 15px rgba(0,0,0,.4);">
+
+  <br>
   <button class="back" onclick="back()">Menú principal</button>
 </div>
 
@@ -198,14 +207,27 @@ function entrar(){
   if(pass.value==="22102025"){
     login.style.display="none";
     menu.style.display="block";
-  }else msg.textContent="Contraseña incorrecta 😢";
+    document.getElementById("music").play();
+    startEffect("💗");
+  }else{
+    msg.textContent="Contraseña incorrecta 😢";
+  }
 }
+
 function openSec(id){
+  stopEffect();
+  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
   menu.style.display="none";
   document.getElementById(id).style.display="block";
+
+  if(id==="carta") startEffect("🌸");
+  if(id==="recuerdo") startEffect("❤️");
+  if(id==="promesa") startEffect("✨");
 }
+
 function back(){
-  document.querySelectorAll('.section').forEach(s=>s.style.display="none");
+  stopEffect();
+  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
   menu.style.display="block";
 }
 </script>
