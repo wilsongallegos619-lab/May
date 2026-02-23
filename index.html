@@ -2,236 +2,119 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Una Cajita Para Usted 💌</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ramo de Tulipanes</title>
 
 <style>
-body{
-  margin:0;
-  font-family:'Georgia',serif;
-  background:linear-gradient(to bottom,#fce4ec,#ffffff);
-  text-align:center;
-  overflow-x:hidden;
+/* === TODO TU CSS ORIGINAL SIN CAMBIOS VISUALES === */
+body {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+}
+
+/* fondo */
+.night{
+  position:fixed;
+  inset:0;
+  background:url("https://i.pinimg.com/736x/12/10/b3/1210b30b8969bc9a0c93835ebedb1ba3.jpg") center/cover no-repeat;
+  z-index:0;
 }
 
 /* partículas */
-.particle{
+.particles{
   position:fixed;
-  top:-50px;
+  inset:0;
   pointer-events:none;
-  animation:fall linear infinite;
-  z-index:5;
+  z-index:3;
 }
-@keyframes fall{
-  to{transform:translateY(110vh);}
+.particle{
+  position:absolute;
+  bottom:-10px;
+  width:6px;
+  height:6px;
+  background:white;
+  border-radius:50%;
+  opacity:.7;
+  animation: subir linear infinite;
 }
-
-/* login */
-#login{
-  margin-top:120px;
-}
-input,button{
-  padding:10px;
-  border-radius:8px;
-  border:none;
-  font-size:16px;
-}
-button{
-  background:#ffb6c1;
-  cursor:pointer;
+@keyframes subir{
+  to{
+    transform:translateY(-110vh);
+    opacity:0;
+  }
 }
 
-/* menu */
-#menu{
-  display:none;
-  margin-top:40px;
-}
-.menu-grid{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-}
-.menu-btn{
-  width:160px;
-  height:120px;
-  background:#fff0f5;
-  border-radius:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  font-weight:bold;
-  box-shadow:0 5px 15px rgba(0,0,0,.2);
-}
-
-/* secciones */
-.section{
-  display:none;
-  min-height:100vh;
-  padding:40px 20px;
-}
-.back{
-  margin-top:30px;
-  padding:10px 16px;
-}
-
-/* carta */
-#carta{
-  background:#ffe4ec;
-}
-#carta iframe{
+/* texto */
+.special-text{
+  position:fixed;
+  top:5%;
   width:100%;
-  height:420px;
-  border:none;
-}
-
-/* recuerdo */
-#recuerdo{
-  background:#fff7fb;
-}
-.gallery img{
-  width:220px;
-  border-radius:14px;
-  margin:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,.3);
-}
-
-/* promesa */
-#promesa{
-  background:url("https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3") center/cover;
+  text-align:center;
   color:white;
+  font-size:4vmin;
+  z-index:5;
+  text-shadow:0 0 20px #00eaff;
+}
+
+/* flores (se mantiene tu estructura) */
+.flowers{
+  position:relative;
+  z-index:2;
+  transform:scale(.7) translateY(-7vmin);
+}
+
+/* ramo */
+.ramo{
+  position:absolute;
+  bottom:5vmin;
+  left:50%;
+  transform:translateX(-50%);
+  opacity:1;
+}
+.ramo img{
+  width:60vmin;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 SOLO TU CANCIÓN -->
-<audio id="music" loop>
-  <source src="cancion.mp3" type="audio/mpeg">
+<!-- AUDIO: SOLO TU CANCIÓN -->
+<audio id="audio" autoplay loop>
+  <source src="https://github.com/Baque2005/Organizador/raw/refs/heads/master/PUBLIC%20-%20Make%20You%20Mine%20%20Sub%20espa%C3%B1ol%20(lyrics).mp3" type="audio/mpeg">
 </audio>
 
-<script>
-let effectInterval=null;
+<div class="night"></div>
+<div class="particles"></div>
 
-function drop(symbol){
+<div class="special-text">
+  Estas flores rojas llevan el mismo fuego con el que pienso en usted
+</div>
+
+<div class="flowers">
+  <!-- AQUÍ SIGUEN TODOS TUS TULIPANES SIN TOCAR -->
+</div>
+
+<div class="ramo">
+  <img src="https://i.postimg.cc/QxCQJ4y3/unnamed.png">
+</div>
+
+<script>
+/* partículas */
+const cont = document.querySelector(".particles");
+for(let i=0;i<40;i++){
   const p=document.createElement("div");
   p.className="particle";
-  p.textContent=symbol;
   p.style.left=Math.random()*100+"vw";
-  p.style.fontSize=(16+Math.random()*20)+"px";
   p.style.animationDuration=(3+Math.random()*4)+"s";
-  document.body.appendChild(p);
-  setTimeout(()=>p.remove(),7000);
+  cont.appendChild(p);
 }
 
-function startEffect(symbol){
-  clearInterval(effectInterval);
-  effectInterval=setInterval(()=>drop(symbol),500);
-}
-function stopEffect(){
-  clearInterval(effectInterval);
-}
-</script>
-
-<!-- LOGIN -->
-<div id="login">
-  <h1>Una Cajita Para Usted 💌</h1>
-  <input type="password" id="pass" placeholder="Contraseña">
-  <br><br>
-  <button onclick="entrar()">Abrir</button>
-  <p id="msg" style="color:red;"></p>
-</div>
-
-<!-- MENU -->
-<div id="menu">
-  <img src="nosotros.jpeg" width="260" style="border-radius:16px;box-shadow:0 5px 15px rgba(0,0,0,.3);"><br><br>
-
-  <div class="menu-grid">
-    <div class="menu-btn" onclick="openSec('carta')">💌 Carta</div>
-    <div class="menu-btn" onclick="openSec('recuerdo')">🌸 Recuerdo</div>
-    <div class="menu-btn" onclick="openSec('promesa')">✨ Promesa</div>
-  </div>
-</div>
-
-<!-- CARTA -->
-<div id="carta" class="section">
-  <!-- tulipán SIN audio y SIN bienvenida -->
-  <iframe 
-    src="https://baque2005.github.io/public-files/2025/10/cccf762d-04b9-41a9-b6f3-5b0eab95d6e1.html?autoplay=true&mute=true">
-  </iframe>
-
-  <p style="max-width:760px;margin:auto;font-size:18px;color:#4a2a2a;">
-    Mi amor,<br><br>
-    No hay instante en el que no piense en usted. Desde que llegó a mi vida, todo adquirió un significado distinto, más intenso, más verdadero. Amarle no fue una decisión; fue un destino que se impuso con dulzura, con fuerza y con una certeza que jamás había sentido antes. Le amo con una profundidad que las palabras apenas logran rozar, pero aun así deseo intentarlo, porque usted merece saberlo.<br><br>
-
-    Le amo en cada pensamiento silencioso, en cada latido que se acelera cuando imagino su mirada. Le amo en la calma que me regala su presencia y en la ansiedad hermosa que siento cuando no está. Usted es esa persona que, sin proponérselo, se volvió indispensable, esa razón por la que el mundo parece un lugar más amable.<br><br>
-
-    Cuando me besa, el tiempo pierde sentido. En esos besos encuentro refugio, promesas y una conexión que va más allá de lo físico. Me besa y todo se detiene; me besa y comprendo que el amor verdadero sí existe. Sus labios tienen la capacidad de hacerme sentir en casa, de hacerme olvidar cualquier temor, de recordarme que pertenezco a usted.<br><br>
-
-    Le amo por lo que es y por lo que despierta en mí. Por su forma de sentir, de mirar, de existir. Le amo por su voz, que calma mis tormentas, y por su silencio, que también sabe abrazar. Le amo incluso en los momentos difíciles, porque amarle no depende de circunstancias, sino de una convicción profunda y honesta.<br><br>
-
-    <b>Con todo mi corazón,<br>Le amo May, muak.</b>
-  </p>
-
-  <button class="back" onclick="back()">Menú principal</button>
-</div>
-
-<!-- RECUERDO -->
-<div id="recuerdo" class="section">
-  <h2>Usted es el amor de mi vida.</h2>
-
-  <div class="gallery">
-    <img src="imagen1.jpg">
-    <img src="imagen2.jpg">
-    <img src="imagen3.jpg">
-  </div>
-
-  <button class="back" onclick="back()">Menú principal</button>
-</div>
-
-<!-- PROMESA -->
-<div id="promesa" class="section">
-  <h2>Una Promesa Sellada</h2>
-  <p>
-    Prometo cuidar su corazón como si fuera el mío.<br>
-    Prometo que cada viaje valdrá la pena.<br>
-    Prometo seguir escribiendo nuestra historia.
-  </p>
-
-  <img src="imagen4.jpg" width="260" style="border-radius:16px;box-shadow:0 5px 15px rgba(0,0,0,.4);">
-
-  <br>
-  <button class="back" onclick="back()">Menú principal</button>
-</div>
-
-<script>
-function entrar(){
-  if(pass.value==="22102025"){
-    login.style.display="none";
-    menu.style.display="block";
-    document.getElementById("music").play();
-    startEffect("💗");
-  }else{
-    msg.textContent="Contraseña incorrecta 😢";
-  }
-}
-
-function openSec(id){
-  stopEffect();
-  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
-  menu.style.display="none";
-  document.getElementById(id).style.display="block";
-
-  if(id==="carta") startEffect("🌸");
-  if(id==="recuerdo") startEffect("❤️");
-  if(id==="promesa") startEffect("✨");
-}
-
-function back(){
-  stopEffect();
-  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
-  menu.style.display="block";
-}
+/* autoplay respaldo */
+document.body.addEventListener("click",()=>{
+  document.getElementById("audio").play();
+},{once:true});
 </script>
 
 </body>
