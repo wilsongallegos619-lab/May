@@ -7,113 +7,174 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Georgia',serif}
-body{background:#000;color:#fff;overflow:hidden}
+body{overflow:hidden;color:white}
 
-/* AUDIO */
+/* ---------- FONDOS ---------- */
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:linear-gradient(120deg,#2b1055,#000);
+  z-index:-2;
+}
+body::after{
+  content:"";
+  position:fixed;inset:0;
+  background:url("https://i.imgur.com/8QZ7Z9G.png");
+  opacity:.15;
+  animation:moveBg 60s linear infinite;
+  z-index:-1;
+}
+@keyframes moveBg{
+  from{background-position:0 0}
+  to{background-position:1000px 1000px}
+}
+
+/* ---------- AUDIO ---------- */
 #audio{display:none}
 
-/* LOGIN */
+/* ---------- LOGIN ---------- */
 #login{
   position:fixed;inset:0;
   background:linear-gradient(135deg,#ff4d6d,#4b0035);
   display:flex;align-items:center;justify-content:center;
-  z-index:1000
+  z-index:1000;
 }
 #loginBox{
   background:rgba(0,0,0,.5);
-  padding:30px;border-radius:20px;text-align:center
+  padding:30px;border-radius:20px;
+  text-align:center;
 }
-#login input{padding:10px;border-radius:10px;border:none}
-#login button{margin-top:15px;padding:10px 20px;border-radius:10px;border:none}
+#login input{
+  padding:10px;border-radius:10px;border:none;
+}
+#login button{
+  margin-top:15px;padding:10px 20px;
+  border-radius:10px;border:none;
+}
 
-/* NOSOTROS */
+/* ---------- NOSOTROS ---------- */
 #nosotros{
   display:none;
   position:fixed;inset:0;
-  background:#000;
   display:flex;align-items:center;justify-content:center;
-  z-index:900
+  z-index:900;
 }
 #nosotros img{
   max-width:70%;
-  border-radius:25px;
-  box-shadow:0 0 40px pink;
+  border-radius:30px;
+  box-shadow:0 0 50px rgba(255,182,193,.8);
+  animation:fadeIn 3s ease forwards;
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(.9)}
+  to{opacity:1;transform:scale(1)}
 }
 
-/* MENU */
+/* ---------- MENU ---------- */
 #menu{
   display:none;
   position:fixed;inset:0;
-  background:rgba(0,0,0,.6);
-  display:flex;gap:20px;
+  display:flex;gap:25px;
   align-items:center;justify-content:center;
-  z-index:950
+  background:rgba(0,0,0,.4);
+  z-index:950;
 }
 .menu-btn{
-  width:160px;height:160px;
+  width:170px;height:170px;
   background:rgba(255,255,255,.15);
-  border-radius:20px;
+  border-radius:25px;
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;text-align:center;
-  transition:.3s
+  text-align:center;
+  cursor:pointer;
+  font-size:18px;
+  transition:.4s;
 }
-.menu-btn:hover{transform:scale(1.1)}
+.menu-btn:hover{
+  transform:scale(1.1);
+  background:rgba(255,182,193,.35);
+}
 
-/* SECCIONES */
+/* ---------- SECCIONES ---------- */
 .section{
   display:none;
   position:fixed;inset:0;
-  z-index:980;
   overflow:hidden;
+  z-index:980;
 }
 
-/* BOTÓN */
+/* ---------- BOTÓN ---------- */
 .back{
-  position:absolute;bottom:20px;left:50%;
+  position:absolute;
+  bottom:25px;left:50%;
   transform:translateX(-50%);
-  padding:10px 20px;border-radius:20px;border:none
+  padding:10px 25px;
+  border-radius:25px;
+  border:none;
+  cursor:pointer;
 }
 
-/* EFECTOS */
+/* ---------- EFECTOS ---------- */
 .fall{
-  position:absolute;top:-50px;
+  position:absolute;
+  top:-40px;
   animation:fall linear infinite;
 }
-@keyframes fall{to{transform:translateY(110vh)}}
-
-/* CARTA */
-#carta{background:#000}
-#textoCarta{
-  position:absolute;top:5%;left:5%;width:90%;
-  text-align:center;font-size:17px
+@keyframes fall{
+  to{transform:translateY(110vh)}
 }
 
-/* TULIPÁN SVG */
-#tulipan{
+/* ---------- CARTA ---------- */
+#carta{
+  background:linear-gradient(#000,#2b1055);
+}
+#textoCarta{
   position:absolute;
-  bottom:-20px;
+  top:5%;left:5%;
+  width:90%;
+  max-height:55%;
+  overflow-y:auto;
+  text-align:center;
+  font-size:17px;
+}
+#tulipanes{
+  position:absolute;
+  bottom:-10px;
   left:50%;
   transform:translateX(-50%);
-  width:300px;
+  width:320px;
+  animation:sway 6s ease-in-out infinite;
+}
+@keyframes sway{
+  0%,100%{transform:translateX(-50%) rotate(-1deg)}
+  50%{transform:translateX(-50%) rotate(1deg)}
 }
 
-/* RECUERDO */
+/* ---------- RECUERDO ---------- */
 #recuerdo{
   background:linear-gradient(#2d6a4f,#081c15);
 }
 #recuerdo .imgs{
-  display:flex;gap:15px;
-  justify-content:center;margin-top:80px
+  display:flex;
+  gap:15px;
+  justify-content:center;
+  margin-top:90px;
 }
-#recuerdo img{width:25%;border-radius:15px}
+#recuerdo img{
+  width:25%;
+  border-radius:20px;
+  box-shadow:0 0 20px rgba(255,255,255,.3);
+}
 
-/* PROMESA */
+/* ---------- PROMESA ---------- */
 #promesa{
   background:radial-gradient(circle at top,#2b1055,#000);
 }
 #promesa img{
-  display:block;margin:30px auto;
-  width:250px;border-radius:20px
+  display:block;
+  margin:30px auto;
+  width:260px;
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(173,216,230,.6);
 }
 </style>
 </head>
@@ -126,8 +187,9 @@ body{background:#000;color:#fff;overflow:hidden}
 <div id="login">
   <div id="loginBox">
     <h2>Ingrese el código 💌</h2>
-    <input id="code" type="password">
-    <br><button onclick="enter()">Entrar</button>
+    <input type="password">
+    <br>
+    <button onclick="enter()">Entrar</button>
   </div>
 </div>
 
@@ -147,17 +209,25 @@ body{background:#000;color:#fff;overflow:hidden}
 <div id="carta" class="section">
   <div id="textoCarta">
 Mi amor,<br><br>
-No hay instante en el que no piense en usted...<br><br>
-<strong>Le amo May, muak.</strong>
+
+No hay instante en el que no piense en usted. Desde que llegó a mi vida, todo adquirió un significado distinto, más intenso, más verdadero. Amarle no fue una decisión; fue un destino que se impuso con dulzura, con fuerza y con una certeza que jamás había sentido antes. Le amo con una profundidad que las palabras apenas logran rozar, pero aun así deseo intentarlo, porque usted merece saberlo.<br><br>
+
+Le amo en cada pensamiento silencioso, en cada latido que se acelera cuando imagino su mirada. Le amo en la calma que me regala su presencia y en la ansiedad hermosa que siento cuando no está. Usted es esa persona que, sin proponérselo, se volvió indispensable, esa razón por la que el mundo parece un lugar más amable.<br><br>
+
+Cuando me besa, el tiempo pierde sentido. En esos besos encuentro refugio, promesas y una conexión que va más allá de lo físico. Me besa y todo se detiene; me besa y comprendo que el amor verdadero sí existe. Sus labios tienen la capacidad de hacerme sentir en casa, de hacerme olvidar cualquier temor, de recordarme que pertenezezco a usted.<br><br>
+
+Le amo por lo que es y por lo que despierta en mí. Por su forma de sentir, de mirar, de existir. Le amo por su voz, que calma mis tormentas, y por su silencio, que también sabe abrazar. Le amo incluso en los momentos difíciles, porque amarle no depende de circunstancias, sino de una convicción profunda y honesta.<br><br>
+
+Si supiera cuántas veces le pienso antes de dormir, cuántas veces le imagino sonriendo, cuántas veces deseo tenerle cerca solo para mirarle y confirmar que es real. Usted se ha convertido en ese pensamiento constante que no cansa, en ese deseo que no se apaga, en ese amor que no conoce medida.<br><br>
+
+No le prometo un amor perfecto, pero sí uno sincero. Un amor que le respeta, que le cuida, que le admira y que le elige cada día. Un amor que desea besarle sin prisa, tomarle de la mano con orgullo y decirle, una y otra vez, que le ama sin reservas.<br><br>
+
+Gracias por existir, por permitirme amarle, por ser quien es. Si el amor tuviera nombre, sin duda llevaría el suyo.<br><br>
+
+<strong>Con todo mi corazón,<br>Le amo May, muak.</strong>
   </div>
 
-  <!-- Tulipán animado -->
-  <svg id="tulipan" viewBox="0 0 200 400">
-    <path d="M100 400 V200" stroke="green" stroke-width="6"/>
-    <path d="M100 200 C40 180,40 80,100 40 C160 80,160 180,100 200"
-          fill="red"/>
-  </svg>
-
+  <img id="tulipanes" src="tulipanes.png">
   <button class="back" onclick="goMenu()">Menú principal</button>
 </div>
 
@@ -185,32 +255,32 @@ No hay instante en el que no piense en usted...<br><br>
 
 <script>
 function enter(){
-  document.getElementById('login').style.display='none';
-  document.getElementById('nosotros').style.display='flex';
-  document.getElementById('audio').play();
-  document.getElementById('menu').style.display='flex';
+  document.getElementById("login").style.display="none";
+  document.getElementById("nosotros").style.display="flex";
+  document.getElementById("menu").style.display="flex";
+  document.getElementById("audio").play();
 }
 
 function hideAll(){
-  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
-  document.querySelectorAll('.fall').forEach(f=>f.remove());
+  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+  document.querySelectorAll(".fall").forEach(f=>f.remove());
 }
 
 function openCarta(){
   hideAll();
-  document.getElementById('carta').style.display='block';
+  document.getElementById("carta").style.display="block";
   lluvia("🌸");
 }
 
 function openRecuerdo(){
   hideAll();
-  document.getElementById('recuerdo').style.display='block';
+  document.getElementById("recuerdo").style.display="block";
   lluvia("❤️");
 }
 
 function openPromesa(){
   hideAll();
-  document.getElementById('promesa').style.display='block';
+  document.getElementById("promesa").style.display="block";
   lluvia("⭐");
 }
 
@@ -220,12 +290,12 @@ function goMenu(){
 
 function lluvia(sim){
   for(let i=0;i<40;i++){
-    let e=document.createElement('div');
-    e.className='fall';
+    let e=document.createElement("div");
+    e.className="fall";
     e.innerText=sim;
-    e.style.left=Math.random()*100+'%';
-    e.style.animationDuration=3+Math.random()*5+'s';
-    e.style.fontSize=20+Math.random()*20+'px';
+    e.style.left=Math.random()*100+"%";
+    e.style.animationDuration=(5+Math.random()*5)+"s";
+    e.style.fontSize=(16+Math.random()*18)+"px";
     document.body.appendChild(e);
   }
 }
