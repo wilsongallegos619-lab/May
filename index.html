@@ -7,154 +7,113 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Georgia',serif}
-body{
-  background:#000;
-  color:#fff;
-  overflow:hidden;
-}
+body{background:#000;color:#fff;overflow:hidden}
 
-/* ---------- AUDIO ---------- */
+/* AUDIO */
 #audio{display:none}
 
-/* ---------- LOGIN ---------- */
+/* LOGIN */
 #login{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(135deg,#ff4d6d,#8b1e3f);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:1000;
+  position:fixed;inset:0;
+  background:linear-gradient(135deg,#ff4d6d,#4b0035);
+  display:flex;align-items:center;justify-content:center;
+  z-index:1000
 }
 #loginBox{
-  background:rgba(0,0,0,.4);
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
+  background:rgba(0,0,0,.5);
+  padding:30px;border-radius:20px;text-align:center
 }
-#login input{
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  margin-top:10px;
-}
-#login button{
-  margin-top:15px;
-  padding:10px 20px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-}
+#login input{padding:10px;border-radius:10px;border:none}
+#login button{margin-top:15px;padding:10px 20px;border-radius:10px;border:none}
 
-/* ---------- NOSOTROS ---------- */
+/* NOSOTROS */
 #nosotros{
   display:none;
-  position:fixed;
-  inset:0;
+  position:fixed;inset:0;
   background:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:900;
+  display:flex;align-items:center;justify-content:center;
+  z-index:900
 }
 #nosotros img{
-  max-width:80%;
-  border-radius:20px;
+  max-width:70%;
+  border-radius:25px;
   box-shadow:0 0 40px pink;
 }
 
-/* ---------- MENU ---------- */
+/* MENU */
 #menu{
   display:none;
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle,#1a002a,#000);
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:center;
-  gap:20px;
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;gap:20px;
+  align-items:center;justify-content:center;
+  z-index:950
 }
 .menu-btn{
-  width:160px;
-  height:160px;
-  background:rgba(255,255,255,.1);
+  width:160px;height:160px;
+  background:rgba(255,255,255,.15);
   border-radius:20px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  cursor:pointer;
-  transition:.3s;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;text-align:center;
+  transition:.3s
 }
 .menu-btn:hover{transform:scale(1.1)}
 
-/* ---------- SECCIONES ---------- */
+/* SECCIONES */
 .section{
   display:none;
-  position:fixed;
-  inset:0;
+  position:fixed;inset:0;
+  z-index:980;
   overflow:hidden;
 }
+
+/* BOTÓN */
 .back{
+  position:absolute;bottom:20px;left:50%;
+  transform:translateX(-50%);
+  padding:10px 20px;border-radius:20px;border:none
+}
+
+/* EFECTOS */
+.fall{
+  position:absolute;top:-50px;
+  animation:fall linear infinite;
+}
+@keyframes fall{to{transform:translateY(110vh)}}
+
+/* CARTA */
+#carta{background:#000}
+#textoCarta{
+  position:absolute;top:5%;left:5%;width:90%;
+  text-align:center;font-size:17px
+}
+
+/* TULIPÁN SVG */
+#tulipan{
   position:absolute;
-  bottom:20px;
+  bottom:-20px;
   left:50%;
   transform:translateX(-50%);
-  padding:10px 20px;
-  border-radius:20px;
-  border:none;
-  cursor:pointer;
+  width:300px;
 }
 
-/* ---------- CARTA ---------- */
-#carta{
-  background:#000;
+/* RECUERDO */
+#recuerdo{
+  background:linear-gradient(#2d6a4f,#081c15);
 }
-#carta img{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  max-width:70%;
+#recuerdo .imgs{
+  display:flex;gap:15px;
+  justify-content:center;margin-top:80px
 }
-#textoCarta{
-  position:absolute;
-  top:10%;
-  width:90%;
-  left:5%;
-  text-align:center;
-  font-size:18px;
-}
+#recuerdo img{width:25%;border-radius:15px}
 
-/* ---------- PROMESA ---------- */
+/* PROMESA */
 #promesa{
   background:radial-gradient(circle at top,#2b1055,#000);
 }
-
-/* ---------- RECUERDO ---------- */
-#recuerdo{
-  background:linear-gradient(#3a7d44,#1b3a2b);
-}
-#recuerdo .imagenes{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  margin-top:20px;
-}
-#recuerdo img{
-  width:25%;
-  border-radius:15px;
-}
-
-/* ---------- EFECTOS ---------- */
-.fall{
-  position:absolute;
-  top:-50px;
-  animation:fall linear infinite;
-}
-@keyframes fall{
-  to{transform:translateY(110vh)}
+#promesa img{
+  display:block;margin:30px auto;
+  width:250px;border-radius:20px
 }
 </style>
 </head>
@@ -168,8 +127,7 @@ body{
   <div id="loginBox">
     <h2>Ingrese el código 💌</h2>
     <input id="code" type="password">
-    <br>
-    <button onclick="enter()">Entrar</button>
+    <br><button onclick="enter()">Entrar</button>
   </div>
 </div>
 
@@ -192,41 +150,50 @@ Mi amor,<br><br>
 No hay instante en el que no piense en usted...<br><br>
 <strong>Le amo May, muak.</strong>
   </div>
-  <img src="tulipanes.png">
+
+  <!-- Tulipán animado -->
+  <svg id="tulipan" viewBox="0 0 200 400">
+    <path d="M100 400 V200" stroke="green" stroke-width="6"/>
+    <path d="M100 200 C40 180,40 80,100 40 C160 80,160 180,100 200"
+          fill="red"/>
+  </svg>
+
   <button class="back" onclick="goMenu()">Menú principal</button>
 </div>
 
 <!-- RECUERDO -->
 <div id="recuerdo" class="section">
-  <h2 style="text-align:center;margin-top:20px">Usted es el amor de mi vida.</h2>
-  <div class="imagenes">
+  <h2 style="text-align:center;margin-top:30px">Usted es el amor de mi vida.</h2>
+  <div class="imgs">
     <img src="imagen1.jpg">
     <img src="imagen2.jpg">
     <img src="imagen3.jpg">
-    <img src="imagen4.jpg">
   </div>
   <button class="back" onclick="goMenu()">Menú principal</button>
 </div>
 
 <!-- PROMESA -->
 <div id="promesa" class="section">
-  <div style="text-align:center;margin-top:50px">
+  <div style="text-align:center;margin-top:40px">
     <p>Prometo cuidar su corazón como si fuera el mío.</p>
     <p>Prometo que cada viaje valdrá la pena.</p>
     <p>Prometo seguir escribiendo nuestra historia.</p>
   </div>
+  <img src="imagen4.jpg">
   <button class="back" onclick="goMenu()">Menú principal</button>
 </div>
 
 <script>
 function enter(){
   document.getElementById('login').style.display='none';
-  document.getElementById('audio').play();
   document.getElementById('nosotros').style.display='flex';
-  setTimeout(()=>{
-    document.getElementById('nosotros').style.display='none';
-    document.getElementById('menu').style.display='flex';
-  },3000);
+  document.getElementById('audio').play();
+  document.getElementById('menu').style.display='flex';
+}
+
+function hideAll(){
+  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+  document.querySelectorAll('.fall').forEach(f=>f.remove());
 }
 
 function openCarta(){
@@ -249,19 +216,13 @@ function openPromesa(){
 
 function goMenu(){
   hideAll();
-  document.getElementById('menu').style.display='flex';
 }
 
-function hideAll(){
-  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
-  document.querySelectorAll('.fall').forEach(f=>f.remove());
-}
-
-function lluvia(simbolo){
+function lluvia(sim){
   for(let i=0;i<40;i++){
     let e=document.createElement('div');
     e.className='fall';
-    e.innerText=simbolo;
+    e.innerText=sim;
     e.style.left=Math.random()*100+'%';
     e.style.animationDuration=3+Math.random()*5+'s';
     e.style.fontSize=20+Math.random()*20+'px';
