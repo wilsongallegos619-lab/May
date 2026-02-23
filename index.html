@@ -2,302 +2,233 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Usted 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una Cajita Para Usted 💌</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Georgia',serif}
-body{overflow:hidden;color:white}
-
-/* ---------- FONDOS ---------- */
-body::before{
-  content:"";
-  position:fixed;inset:0;
-  background:linear-gradient(120deg,#2b1055,#000);
-  z-index:-2;
-}
-body::after{
-  content:"";
-  position:fixed;inset:0;
-  background:url("https://i.imgur.com/8QZ7Z9G.png");
-  opacity:.15;
-  animation:moveBg 60s linear infinite;
-  z-index:-1;
-}
-@keyframes moveBg{
-  from{background-position:0 0}
-  to{background-position:1000px 1000px}
-}
-
-/* ---------- AUDIO ---------- */
-#audio{display:none}
-
-/* ---------- LOGIN ---------- */
-#login{
-  position:fixed;inset:0;
-  background:linear-gradient(135deg,#ff4d6d,#4b0035);
-  display:flex;align-items:center;justify-content:center;
-  z-index:1000;
-}
-#loginBox{
-  background:rgba(0,0,0,.5);
-  padding:30px;border-radius:20px;
+body{
+  margin:0;
+  font-family:'Georgia',serif;
+  background:linear-gradient(to bottom,#fce4ec,#ffffff);
   text-align:center;
-}
-#login input{
-  padding:10px;border-radius:10px;border:none;
-}
-#login button{
-  margin-top:15px;padding:10px 20px;
-  border-radius:10px;border:none;
+  overflow-x:hidden;
 }
 
-/* ---------- NOSOTROS ---------- */
-#nosotros{
-  display:none;
-  position:fixed;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  z-index:900;
-}
-#nosotros img{
-  max-width:70%;
-  border-radius:30px;
-  box-shadow:0 0 50px rgba(255,182,193,.8);
-  animation:fadeIn 3s ease forwards;
-}
-@keyframes fadeIn{
-  from{opacity:0;transform:scale(.9)}
-  to{opacity:1;transform:scale(1)}
-}
-
-/* ---------- MENU ---------- */
-#menu{
-  display:none;
-  position:fixed;inset:0;
-  display:flex;gap:25px;
-  align-items:center;justify-content:center;
-  background:rgba(0,0,0,.4);
-  z-index:950;
-}
-.menu-btn{
-  width:170px;height:170px;
-  background:rgba(255,255,255,.15);
-  border-radius:25px;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;
-  cursor:pointer;
-  font-size:18px;
-  transition:.4s;
-}
-.menu-btn:hover{
-  transform:scale(1.1);
-  background:rgba(255,182,193,.35);
-}
-
-/* ---------- SECCIONES ---------- */
-.section{
-  display:none;
-  position:fixed;inset:0;
-  overflow:hidden;
-  z-index:980;
-}
-
-/* ---------- BOTÓN ---------- */
-.back{
-  position:absolute;
-  bottom:25px;left:50%;
-  transform:translateX(-50%);
-  padding:10px 25px;
-  border-radius:25px;
-  border:none;
-  cursor:pointer;
-}
-
-/* ---------- EFECTOS ---------- */
-.fall{
-  position:absolute;
-  top:-40px;
+/* partículas */
+.particle{
+  position:fixed;
+  top:-50px;
+  pointer-events:none;
   animation:fall linear infinite;
+  z-index:5;
 }
 @keyframes fall{
-  to{transform:translateY(110vh)}
+  to{transform:translateY(110vh);}
 }
 
-/* ---------- CARTA ---------- */
-#carta{
-  background:linear-gradient(#000,#2b1055);
+/* login */
+#login{
+  margin-top:120px;
 }
-#textoCarta{
-  position:absolute;
-  top:5%;left:5%;
-  width:90%;
-  max-height:55%;
-  overflow-y:auto;
-  text-align:center;
-  font-size:17px;
+input,button{
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  font-size:16px;
 }
-#tulipanes{
-  position:absolute;
-  bottom:-10px;
-  left:50%;
-  transform:translateX(-50%);
-  width:320px;
-  animation:sway 6s ease-in-out infinite;
-}
-@keyframes sway{
-  0%,100%{transform:translateX(-50%) rotate(-1deg)}
-  50%{transform:translateX(-50%) rotate(1deg)}
+button{
+  background:#ffb6c1;
+  cursor:pointer;
 }
 
-/* ---------- RECUERDO ---------- */
-#recuerdo{
-  background:linear-gradient(#2d6a4f,#081c15);
+/* menu */
+#menu{
+  display:none;
+  margin-top:40px;
 }
-#recuerdo .imgs{
+.menu-grid{
   display:flex;
-  gap:15px;
   justify-content:center;
-  margin-top:90px;
+  gap:20px;
 }
-#recuerdo img{
-  width:25%;
-  border-radius:20px;
-  box-shadow:0 0 20px rgba(255,255,255,.3);
+.menu-btn{
+  width:160px;
+  height:120px;
+  background:#fff0f5;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-weight:bold;
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
 }
 
-/* ---------- PROMESA ---------- */
-#promesa{
-  background:radial-gradient(circle at top,#2b1055,#000);
+/* secciones */
+.section{
+  display:none;
+  min-height:100vh;
+  padding:40px 20px;
 }
-#promesa img{
-  display:block;
-  margin:30px auto;
-  width:260px;
-  border-radius:20px;
-  box-shadow:0 0 30px rgba(173,216,230,.6);
+.back{
+  margin-top:30px;
+  padding:10px 16px;
+}
+
+/* carta */
+#carta{
+  background:#ffe4ec;
+}
+#carta iframe{
+  width:100%;
+  height:420px;
+  border:none;
+}
+
+/* recuerdo */
+#recuerdo{
+  background:#fff7fb;
+}
+.gallery img{
+  width:220px;
+  border-radius:14px;
+  margin:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,.3);
+}
+
+/* promesa */
+#promesa{
+  background:url("https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3") center/cover;
+  color:white;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="audio" src="cancion.mp3" loop></audio>
+<audio id="music" loop>
+  <source src="cancion.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let effectInterval=null;
+
+function drop(symbol){
+  const p=document.createElement("div");
+  p.className="particle";
+  p.textContent=symbol;
+  p.style.left=Math.random()*100+"vw";
+  p.style.fontSize=(16+Math.random()*20)+"px";
+  p.style.animationDuration=(3+Math.random()*4)+"s";
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),7000);
+}
+
+function startEffect(symbol){
+  clearInterval(effectInterval);
+  effectInterval=setInterval(()=>drop(symbol),500);
+}
+function stopEffect(){
+  clearInterval(effectInterval);
+}
+</script>
 
 <!-- LOGIN -->
 <div id="login">
-  <div id="loginBox">
-    <h2>Ingrese el código 💌</h2>
-    <input type="password">
-    <br>
-    <button onclick="enter()">Entrar</button>
-  </div>
-</div>
-
-<!-- NOSOTROS -->
-<div id="nosotros">
-  <img src="nosotros.jpeg">
+  <h1>Una Cajita Para Usted 💌</h1>
+  <input type="password" id="pass" placeholder="Contraseña">
+  <br><br>
+  <button onclick="entrar()">Abrir</button>
+  <p id="msg" style="color:red;"></p>
 </div>
 
 <!-- MENU -->
 <div id="menu">
-  <div class="menu-btn" onclick="openCarta()">💐 Carta</div>
-  <div class="menu-btn" onclick="openRecuerdo()">🌸 Recuerdo</div>
-  <div class="menu-btn" onclick="openPromesa()">✨ Promesa</div>
+  <img src="nosotros.jpg" width="260" style="border-radius:16px;box-shadow:0 5px 15px rgba(0,0,0,.3);"><br><br>
+
+  <div class="menu-grid">
+    <div class="menu-btn" onclick="openSec('carta')">💌 Carta</div>
+    <div class="menu-btn" onclick="openSec('recuerdo')">🌸 Recuerdo</div>
+    <div class="menu-btn" onclick="openSec('promesa')">✨ Promesa</div>
+  </div>
 </div>
 
 <!-- CARTA -->
 <div id="carta" class="section">
-  <div id="textoCarta">
-Mi amor,<br><br>
+  <iframe src="https://baque2005.github.io/public-files/2025/10/cccf762d-04b9-41a9-b6f3-5b0eab95d6e1.html"></iframe>
 
-No hay instante en el que no piense en usted. Desde que llegó a mi vida, todo adquirió un significado distinto, más intenso, más verdadero. Amarle no fue una decisión; fue un destino que se impuso con dulzura, con fuerza y con una certeza que jamás había sentido antes. Le amo con una profundidad que las palabras apenas logran rozar, pero aun así deseo intentarlo, porque usted merece saberlo.<br><br>
+  <p style="max-width:760px;margin:auto;font-size:18px;color:#4a2a2a;">
+    Mi amor,<br><br>
+    No hay instante en el que no piense en usted. Desde que llegó a mi vida, todo adquirió un significado distinto, más intenso, más verdadero. Amarle no fue una decisión; fue un destino que se impuso con dulzura, con fuerza y con una certeza que jamás había sentido antes. Le amo con una profundidad que las palabras apenas logran rozar, pero aun así deseo intentarlo, porque usted merece saberlo.<br><br>
 
-Le amo en cada pensamiento silencioso, en cada latido que se acelera cuando imagino su mirada. Le amo en la calma que me regala su presencia y en la ansiedad hermosa que siento cuando no está. Usted es esa persona que, sin proponérselo, se volvió indispensable, esa razón por la que el mundo parece un lugar más amable.<br><br>
+    Le amo en cada pensamiento silencioso, en cada latido que se acelera cuando imagino su mirada. Le amo en la calma que me regala su presencia y en la ansiedad hermosa que siento cuando no está. Usted es esa persona que, sin proponérselo, se volvió indispensable, esa razón por la que el mundo parece un lugar más amable.<br><br>
 
-Cuando me besa, el tiempo pierde sentido. En esos besos encuentro refugio, promesas y una conexión que va más allá de lo físico. Me besa y todo se detiene; me besa y comprendo que el amor verdadero sí existe. Sus labios tienen la capacidad de hacerme sentir en casa, de hacerme olvidar cualquier temor, de recordarme que pertenezezco a usted.<br><br>
+    Cuando me besa, el tiempo pierde sentido. En esos besos encuentro refugio, promesas y una conexión que va más allá de lo físico. Me besa y todo se detiene; me besa y comprendo que el amor verdadero sí existe. Sus labios tienen la capacidad de hacerme sentir en casa, de hacerme olvidar cualquier temor, de recordarme que pertenezco a usted.<br><br>
 
-Le amo por lo que es y por lo que despierta en mí. Por su forma de sentir, de mirar, de existir. Le amo por su voz, que calma mis tormentas, y por su silencio, que también sabe abrazar. Le amo incluso en los momentos difíciles, porque amarle no depende de circunstancias, sino de una convicción profunda y honesta.<br><br>
+    Le amo por lo que es y por lo que despierta en mí. Por su forma de sentir, de mirar, de existir. Le amo por su voz, que calma mis tormentas, y por su silencio, que también sabe abrazar. Le amo incluso en los momentos difíciles, porque amarle no depende de circunstancias, sino de una convicción profunda y honesta.<br><br>
 
-Si supiera cuántas veces le pienso antes de dormir, cuántas veces le imagino sonriendo, cuántas veces deseo tenerle cerca solo para mirarle y confirmar que es real. Usted se ha convertido en ese pensamiento constante que no cansa, en ese deseo que no se apaga, en ese amor que no conoce medida.<br><br>
+    No le prometo un amor perfecto, pero sí uno sincero. Un amor que le respeta, que le cuida, que le admira y que le elige cada día.<br><br>
 
-No le prometo un amor perfecto, pero sí uno sincero. Un amor que le respeta, que le cuida, que le admira y que le elige cada día. Un amor que desea besarle sin prisa, tomarle de la mano con orgullo y decirle, una y otra vez, que le ama sin reservas.<br><br>
+    <b>Con todo mi corazón,<br>Le amo May, muak.</b>
+  </p>
 
-Gracias por existir, por permitirme amarle, por ser quien es. Si el amor tuviera nombre, sin duda llevaría el suyo.<br><br>
-
-<strong>Con todo mi corazón,<br>Le amo May, muak.</strong>
-  </div>
-
-  <img id="tulipanes" src="tulipanes.png">
-  <button class="back" onclick="goMenu()">Menú principal</button>
+  <button class="back" onclick="back()">Menú principal</button>
 </div>
 
 <!-- RECUERDO -->
 <div id="recuerdo" class="section">
-  <h2 style="text-align:center;margin-top:30px">Usted es el amor de mi vida.</h2>
-  <div class="imgs">
+  <h2>Usted es el amor de mi vida.</h2>
+
+  <div class="gallery">
     <img src="imagen1.jpg">
     <img src="imagen2.jpg">
     <img src="imagen3.jpg">
   </div>
-  <button class="back" onclick="goMenu()">Menú principal</button>
+
+  <button class="back" onclick="back()">Menú principal</button>
 </div>
 
 <!-- PROMESA -->
 <div id="promesa" class="section">
-  <div style="text-align:center;margin-top:40px">
-    <p>Prometo cuidar su corazón como si fuera el mío.</p>
-    <p>Prometo que cada viaje valdrá la pena.</p>
-    <p>Prometo seguir escribiendo nuestra historia.</p>
-  </div>
-  <img src="imagen4.jpg">
-  <button class="back" onclick="goMenu()">Menú principal</button>
+  <h2>Una Promesa Sellada</h2>
+  <p>
+    Prometo cuidar su corazón como si fuera el mío.<br>
+    Prometo que cada viaje valdrá la pena.<br>
+    Prometo seguir escribiendo nuestra historia.
+  </p>
+
+  <img src="imagen4.jpg" width="260" style="border-radius:16px;box-shadow:0 5px 15px rgba(0,0,0,.4);">
+
+  <br>
+  <button class="back" onclick="back()">Menú principal</button>
 </div>
 
 <script>
-function enter(){
-  document.getElementById("login").style.display="none";
-  document.getElementById("nosotros").style.display="flex";
-  document.getElementById("menu").style.display="flex";
-  document.getElementById("audio").play();
-}
-
-function hideAll(){
-  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
-  document.querySelectorAll(".fall").forEach(f=>f.remove());
-}
-
-function openCarta(){
-  hideAll();
-  document.getElementById("carta").style.display="block";
-  lluvia("🌸");
-}
-
-function openRecuerdo(){
-  hideAll();
-  document.getElementById("recuerdo").style.display="block";
-  lluvia("❤️");
-}
-
-function openPromesa(){
-  hideAll();
-  document.getElementById("promesa").style.display="block";
-  lluvia("⭐");
-}
-
-function goMenu(){
-  hideAll();
-}
-
-function lluvia(sim){
-  for(let i=0;i<40;i++){
-    let e=document.createElement("div");
-    e.className="fall";
-    e.innerText=sim;
-    e.style.left=Math.random()*100+"%";
-    e.style.animationDuration=(5+Math.random()*5)+"s";
-    e.style.fontSize=(16+Math.random()*18)+"px";
-    document.body.appendChild(e);
+function entrar(){
+  if(pass.value==="22102025"){
+    login.style.display="none";
+    menu.style.display="block";
+    document.getElementById("music").play();
+    startEffect("💗");
+  }else{
+    msg.textContent="Contraseña incorrecta 😢";
   }
+}
+
+function openSec(id){
+  stopEffect();
+  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+  menu.style.display="none";
+  document.getElementById(id).style.display="block";
+
+  if(id==="carta") startEffect("🌸");
+  if(id==="recuerdo") startEffect("❤️");
+  if(id==="promesa") startEffect("✨");
+}
+
+function back(){
+  stopEffect();
+  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+  menu.style.display="block";
 }
 </script>
 
