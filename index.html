@@ -61,6 +61,19 @@ button{
   cursor:pointer;
   font-weight:bold;
   box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+  /* ✨ animación agregada */
+  animation:pulseBtn 3s infinite;
+  transition:transform .3s, box-shadow .3s;
+}
+.menu-btn:hover{
+  transform:scale(1.08);
+  box-shadow:0 12px 25px rgba(255,105,180,.45);
+}
+@keyframes pulseBtn{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.04);}
+  100%{transform:scale(1);}
 }
 
 /* secciones */
@@ -93,12 +106,37 @@ button{
   border-radius:14px;
   margin:10px;
   box-shadow:0 5px 15px rgba(0,0,0,.3);
+  transition:transform .3s, box-shadow .3s;
+}
+.gallery img:hover{
+  transform:scale(1.08);
+  box-shadow:0 15px 30px rgba(0,0,0,.45);
 }
 
 /* promesa */
 #promesa{
   background:url("https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3") center/cover;
   color:white;
+}
+
+/* 💓 palpitación suave de imágenes */
+img{
+  animation:breath 4s ease-in-out infinite;
+}
+@keyframes breath{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.03);}
+  100%{transform:scale(1);}
+}
+
+/* 🎈 imagen principal flotando */
+#menu img{
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+  100%{transform:translateY(0);}
 }
 </style>
 </head>
@@ -162,11 +200,9 @@ function stopEffect(){
 
     Le amo en cada pensamiento silencioso, en cada latido que se acelera cuando imagino su mirada. Le amo en la calma que me regala su presencia y en la ansiedad hermosa que siento cuando no está. Usted es esa persona que, sin proponérselo, se volvió indispensable, esa razón por la que el mundo parece un lugar más amable.<br><br>
 
-    Cuando me besa, el tiempo pierde sentido. En esos besos encuentro refugio, promesas y una conexión que va más allá de lo físico. Me besa y todo se detiene; me besa y comprendo que el amor verdadero sí existe. Sus labios tienen la capacidad de hacerme sentir en casa, de hacerme olvidar cualquier temor, de recordarme que pertenezco a usted.<br><br>
+    Cuando me besa, el tiempo pierde sentido. En esos besos encuentro refugio, promesas y una conexión que va más allá de lo físico. Me besa y todo se detiene; me besa y comprendo que el amor verdadero sí existe.<br><br>
 
-    Le amo por lo que es y por lo que despierta en mí. Por su forma de sentir, de mirar, de existir. Le amo por su voz, que calma mis tormentas, y por su silencio, que también sabe abrazar. Le amo incluso en los momentos difíciles, porque amarle no depende de circunstancias, sino de una convicción profunda y honesta.<br><br>
-
-    No le prometo un amor perfecto, pero sí uno sincero. Un amor que le respeta, que le cuida, que le admira y que le elige cada día.<br><br>
+    Le amo por lo que es y por lo que despierta en mí. Le amo incluso en los momentos difíciles, porque amarle no depende de circunstancias, sino de una convicción profunda y honesta.<br><br>
 
     <b>Con todo mi corazón,<br>Le amo May, muak.</b>
   </p>
