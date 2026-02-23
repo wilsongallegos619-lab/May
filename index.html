@@ -2,147 +2,195 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Una Cajita Para Usted 💌</title>
+
 <style>
-body {
-  margin: 0;
-  background: linear-gradient(to bottom, #fce4ec, #ffffff);
+body{
+  margin:0;
+  height:100vh;
   font-family: 'Georgia', serif;
-  text-align: center;
-  padding-top: 50px;
+  background:#fdecef;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
 }
 
-/* Cajita */
-.caja {
-  width: 320px;
-  margin: 20px auto;
-  background: #ff6f91;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+/* ---------- CAJITA ---------- */
+#login{
+  background:#ff6f91;
+  padding:25px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,.3);
 }
 
-input[type="password"] {
-  padding: 10px;
-  width: 70%;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+#login input{
+  padding:10px;
+  width:200px;
+  border:none;
+  border-radius:6px;
+  margin-bottom:10px;
 }
 
-button {
-  padding: 10px 15px;
-  border: none;
-  background: #ffc2d1;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
+#login button{
+  padding:10px 15px;
+  border:none;
+  border-radius:6px;
+  background:#ffd6e0;
+  cursor:pointer;
 }
 
-/* Secciones ocultas */
-.secciones {
-  display: none;
-  margin-top: 30px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
+#mensaje{
+  color:#7a0019;
+  margin-top:10px;
 }
 
-.seccion {
-  background: #fff0f5;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 12px;
-  box-shadow: 0px 3px 10px rgba(0,0,0,0.2);
+/* ---------- ESCENA PRINCIPAL ---------- */
+#escena{
+  display:none;
+  position:relative;
+  width:100%;
+  height:100%;
 }
 
-.seccion h3 {
-  margin-top: 0;
+#escena img{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  max-width:300px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,.3);
 }
 
-img {
-  width: 100%;
-  max-width: 300px;
-  border-radius: 12px;
-  margin-top: 10px;
+/* ---------- MENU ---------- */
+.menu{
+  position:absolute;
+  width:120px;
+  height:120px;
+  background:#fff0f5;
+  border-radius:15px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
+  font-weight:bold;
+}
+
+#btnCarta{ top:15%; left:20%; }
+#btnRecuerdo{ top:15%; right:20%; }
+#btnPromesa{ bottom:15%; left:50%; transform:translateX(-50%); }
+
+/* ---------- SECCIONES ---------- */
+.seccion{
+  display:none;
+  position:absolute;
+  inset:0;
+  background:#fdecef;
+  padding:40px;
+  text-align:center;
+}
+
+.seccion img{
+  max-width:250px;
+  margin:10px;
+  border-radius:12px;
+}
+
+.volver{
+  margin-top:20px;
+  padding:10px 15px;
+  border:none;
+  border-radius:6px;
+  background:#ffb3c6;
+  cursor:pointer;
 }
 </style>
 </head>
+
 <body>
 
-<h1>Una Cajita Para Usted 💌</h1>
-
-<div class="caja">
-  <p>Ingrese la contraseña para abrir la cajita:</p>
-  <input type="password" id="passInput" placeholder="Contraseña">
-  <button onclick="abrirCajita()">Abrir</button>
-  <p id="mensaje" style="color:red;"></p>
+<!-- CAJITA -->
+<div id="login">
+  <h2>Una Cajita Para Usted 💌</h2>
+  <p>Ingrese la contraseña</p>
+  <input type="password" id="pass">
+  <br>
+  <button onclick="abrir()">Abrir</button>
+  <p id="mensaje"></p>
 </div>
 
-<div class="secciones" id="contenidoSecreto">
+<!-- AUDIO -->
+<audio id="musica" loop>
+  <source src="cancion.mp3" type="audio/mpeg">
+</audio>
 
-  <!-- Sección 1: Carta -->
-  <div class="seccion">
-    <h3>Una Carta Guardada</h3>
-    <p><strong>Título:</strong> “Para cuando me extrañe”</p>
-    <ul>
-      <li>Que usted es su lugar seguro</li>
-      <li>Que siempre vuelve a ella</li>
-      <li>Que la distancia no cambia lo que siente</li>
-    </ul>
-  </div>
+<!-- ESCENA PRINCIPAL -->
+<div id="escena">
+  <img src="nosotros.jpeg" alt="Nosotros">
 
-  <!-- Sección 2: Recuerdo -->
-  <div class="seccion">
-    <h3>Un Recuerdo Encapsulado</h3>
-    <p>Imagen simbólica de:</p>
-    <ul>
-      <li>Tulipanes rojos 🌷</li>
-      <li>El mar 🌊</li>
-      <li>Globos del 14 de febrero 🎈</li>
-    </ul>
-    <p><em>“Este día fue cuando confirmé que usted es el amor de mi vida.”</em></p>
-    <img src="tulipanes.jpg" alt="Recuerdo">
-  </div>
+  <div class="menu" id="btnCarta" onclick="mostrar('carta')">💌<br>Carta</div>
+  <div class="menu" id="btnRecuerdo" onclick="mostrar('recuerdo')">📸<br>Recuerdo</div>
+  <div class="menu" id="btnPromesa" onclick="mostrar('promesa')">🤍<br>Promesa</div>
+</div>
 
-  <!-- Sección 3: Vale -->
-  <div class="seccion">
-    <h3>Un Vale Romántico</h3>
-    <p>Vale por:</p>
-    <ul>
-      <li>1000 besos</li>
-      <li>100 abrazos eternos</li>
-      <li>Una cita sorpresa</li>
-      <li>Volver a verla pronto</li>
-    </ul>
-  </div>
+<!-- CARTA -->
+<div class="seccion" id="carta">
+  <h2>Una Carta Guardada</h2>
+  <p>
+    Quiero que sepa que cada pensamiento sobre usted ilumina mis días y hace que todo
+    a mi alrededor se sienta más hermoso. Gracias por ser alguien tan especial en mi vida;
+    su presencia hace que todo valga la pena.
+  </p>
+  <button class="volver" onclick="volver()">Menú principal</button>
+</div>
 
-  <!-- Sección 4: Promesa -->
-  <div class="seccion">
-    <h3>Una Promesa Sellada</h3>
-    <p>Prometo cuidar su corazón como si fuera el mío.</p>
-    <p>Prometo que cada viaje valdrá la pena.</p>
-    <p>Prometo seguir escribiendo nuestra historia.</p>
-    <p style="color:red; font-weight:bold;">💌 Promesa Eterna</p>
-  </div>
+<!-- RECUERDO -->
+<div class="seccion" id="recuerdo">
+  <h2>Un Recuerdo Encapsulado</h2>
+  <p><strong>“Usted es el amor de mi vida.”</strong></p>
+  <img src="imagen1.jpeg">
+  <img src="imagen2.jpeg">
+  <img src="imagen3.jpeg">
+  <br>
+  <button class="volver" onclick="volver()">Menú principal</button>
+</div>
 
+<!-- PROMESA -->
+<div class="seccion" id="promesa">
+  <h2>Una Promesa Sellada</h2>
+  <p>Prometo cuidar su corazón como si fuera el mío.</p>
+  <p>Prometo que cada viaje valdrá la pena.</p>
+  <p>Prometo seguir escribiendo nuestra historia.</p>
+  <img src="imagen4.jpeg">
+  <br>
+  <button class="volver" onclick="volver()">Menú principal</button>
 </div>
 
 <script>
-function abrirCajita() {
-  const input = document.getElementById("passInput").value;
-  const mensaje = document.getElementById("mensaje");
-  const contenido = document.getElementById("contenidoSecreto");
-
-  if(input === "22102025") {
-    contenido.style.display = "block";
-    mensaje.textContent = "";
-  } else {
-    mensaje.textContent = "Contraseña incorrecta 😢";
-    contenido.style.display = "none";
+function abrir(){
+  const pass = document.getElementById("pass").value;
+  if(pass === "22102025"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("escena").style.display="block";
+    document.getElementById("musica").play();
+  }else{
+    document.getElementById("mensaje").textContent="Contraseña incorrecta 😢";
   }
+}
+
+function mostrar(id){
+  document.getElementById("escena").style.display="none";
+  document.getElementById(id).style.display="block";
+}
+
+function volver(){
+  document.querySelectorAll(".seccion").forEach(s=>s.style.display="none");
+  document.getElementById("escena").style.display="block";
 }
 </script>
 
